@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, type CSSProperties } from "react";
 import {
   ArrowRight,
   Building2,
@@ -20,6 +20,24 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
+
+type ThemeStyles = CSSProperties & {
+  [key: `--${string}`]: string;
+};
+
+type SectionBadgeProps = {
+  children: React.ReactNode;
+};
+
+type ThemeToggleProps = {
+  isDarkMode: boolean;
+  setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+type NavbarProps = {
+  isDarkMode: boolean;
+  setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const whatsappLink = "https://wa.me/2347062874510";
 
@@ -130,7 +148,7 @@ const faqs = [
   },
 ];
 
-function ThemeToggle({ isDarkMode, setIsDarkMode }) {
+function ThemeToggle({ isDarkMode, setIsDarkMode }: ThemeToggleProps) {
   return (
     <button
       type="button"
@@ -144,7 +162,7 @@ function ThemeToggle({ isDarkMode, setIsDarkMode }) {
   );
 }
 
-function Navbar({ isDarkMode, setIsDarkMode }) {
+function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -261,7 +279,7 @@ function Navbar({ isDarkMode, setIsDarkMode }) {
   );
 }
 
-function SectionBadge({ children }) {
+function SectionBadge({ children }: SectionBadgeProps) {
   return (
     <span className="inline-flex rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-orange-600">
       {children}
@@ -732,21 +750,21 @@ function Footer() {
 export default function Page() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const themeStyles = {
-    "--bg": isDarkMode ? "#07111f" : "#ffffff",
-    "--surface": isDarkMode ? "#101b2d" : "#ffffff",
-    "--surface-2": isDarkMode ? "#14213a" : "#fff7ed",
-    "--soft-bg": isDarkMode ? "#0b1728" : "#fff7ed",
-    "--text": isDarkMode ? "#f8fafc" : "#111827",
-    "--muted": isDarkMode ? "#cbd5e1" : "#4b5563",
-    "--border": isDarkMode ? "rgba(251, 146, 60, 0.22)" : "#fed7aa",
-    "--nav-bg": isDarkMode
-      ? "rgba(7, 17, 31, 0.92)"
-      : "rgba(255, 255, 255, 0.92)",
-    "--dark-section": isDarkMode
-      ? "linear-gradient(135deg, #020617 0%, #0f172a 45%, #431407 100%)"
-      : "#111827",
-  };
+  const themeStyles: ThemeStyles = {
+  "--bg": isDarkMode ? "#07111f" : "#ffffff",
+  "--surface": isDarkMode ? "#101b2d" : "#ffffff",
+  "--surface-2": isDarkMode ? "#14213a" : "#fff7ed",
+  "--soft-bg": isDarkMode ? "#0b1728" : "#fff7ed",
+  "--text": isDarkMode ? "#f8fafc" : "#111827",
+  "--muted": isDarkMode ? "#cbd5e1" : "#4b5563",
+  "--border": isDarkMode ? "rgba(251, 146, 60, 0.22)" : "#fed7aa",
+  "--nav-bg": isDarkMode
+    ? "rgba(7, 17, 31, 0.92)"
+    : "rgba(255, 255, 255, 0.92)",
+  "--dark-section": isDarkMode
+    ? "linear-gradient(135deg, #020617 0%, #0f172a 45%, #431407 100%)"
+    : "#111827",
+};
 
   return (
     <main
