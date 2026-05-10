@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState, type CSSProperties } from "react";
 import {
   ArrowRight,
@@ -349,10 +350,14 @@ function Hero() {
 
         <div className="relative">
           <div className="relative overflow-hidden rounded-[2rem] border-8 border-[var(--surface)] shadow-2xl shadow-orange-100">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=80"
               alt="Modern residential building"
+              width={1400}
+              height={933}
+              sizes="(min-width: 1024px) 48vw, 100vw"
               className="h-[520px] w-full object-cover"
+              fetchPriority="high"
             />
 
             <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-gray-950/10 to-transparent" />
@@ -549,9 +554,12 @@ function Projects() {
               className="overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] shadow-sm transition hover:shadow-xl hover:shadow-orange-100"
             >
               <div className="relative h-72 overflow-hidden">
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
+                  width={1200}
+                  height={800}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   className="h-full w-full object-cover transition duration-700 hover:scale-105"
                 />
 
@@ -751,20 +759,20 @@ export default function Page() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const themeStyles: ThemeStyles = {
-  "--bg": isDarkMode ? "#07111f" : "#ffffff",
-  "--surface": isDarkMode ? "#101b2d" : "#ffffff",
-  "--surface-2": isDarkMode ? "#14213a" : "#fff7ed",
-  "--soft-bg": isDarkMode ? "#0b1728" : "#fff7ed",
-  "--text": isDarkMode ? "#f8fafc" : "#111827",
-  "--muted": isDarkMode ? "#cbd5e1" : "#4b5563",
-  "--border": isDarkMode ? "rgba(251, 146, 60, 0.22)" : "#fed7aa",
-  "--nav-bg": isDarkMode
-    ? "rgba(7, 17, 31, 0.92)"
-    : "rgba(255, 255, 255, 0.92)",
-  "--dark-section": isDarkMode
-    ? "linear-gradient(135deg, #020617 0%, #0f172a 45%, #431407 100%)"
-    : "#111827",
-};
+    "--bg": isDarkMode ? "#07111f" : "#ffffff",
+    "--surface": isDarkMode ? "#101b2d" : "#ffffff",
+    "--surface-2": isDarkMode ? "#14213a" : "#fff7ed",
+    "--soft-bg": isDarkMode ? "#0b1728" : "#fff7ed",
+    "--text": isDarkMode ? "#f8fafc" : "#111827",
+    "--muted": isDarkMode ? "#cbd5e1" : "#4b5563",
+    "--border": isDarkMode ? "rgba(251, 146, 60, 0.22)" : "#fed7aa",
+    "--nav-bg": isDarkMode
+      ? "rgba(7, 17, 31, 0.92)"
+      : "rgba(255, 255, 255, 0.92)",
+    "--dark-section": isDarkMode
+      ? "linear-gradient(135deg, #020617 0%, #0f172a 45%, #431407 100%)"
+      : "#111827",
+  };
 
   return (
     <main
