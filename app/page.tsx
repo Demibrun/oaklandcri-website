@@ -207,7 +207,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
             href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-bold text-[var(--accent-contrast)] shadow-lg shadow-[var(--button-shadow)] transition hover:bg-[var(--accent-strong)]"
+            className="rounded-full bg-[var(--button-bg)] px-5 py-3 text-sm font-bold text-[var(--button-text)] shadow-lg shadow-[var(--button-shadow)] transition hover:bg-[var(--button-bg-hover)]"
           >
             Contact Us
           </a>
@@ -223,7 +223,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
             href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-bold text-[var(--accent-contrast)] sm:inline-flex"
+            className="hidden rounded-full bg-[var(--button-bg)] px-4 py-2 text-xs font-bold text-[var(--button-text)] sm:inline-flex"
           >
             Contact
           </a>
@@ -269,7 +269,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
-              className="rounded-full bg-[var(--accent)] px-5 py-3 text-center text-sm font-bold text-[var(--accent-contrast)]"
+              className="rounded-full bg-[var(--button-bg)] px-5 py-3 text-center text-sm font-bold text-[var(--button-text)]"
             >
               Contact Us
             </a>
@@ -314,7 +314,7 @@ function Hero() {
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
             <a
               href="#services"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-7 py-4 text-sm font-black text-[var(--accent-contrast)] shadow-xl shadow-[var(--button-shadow)] transition hover:bg-[var(--accent-strong)]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--button-bg)] px-7 py-4 text-sm font-black text-[var(--button-text)] shadow-xl shadow-[var(--button-shadow)] transition hover:bg-[var(--button-bg-hover)]"
             >
               Explore Services <ArrowRight size={18} />
             </a>
@@ -710,7 +710,7 @@ function Contact() {
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-7 py-4 text-sm font-black text-[var(--accent-contrast)] shadow-xl shadow-[var(--button-shadow)] transition hover:bg-[var(--accent-strong)]"
+              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--button-bg)] px-7 py-4 text-sm font-black text-[var(--button-text)] shadow-xl shadow-[var(--button-shadow)] transition hover:bg-[var(--button-bg-hover)]"
             >
               Start WhatsApp Chat <ArrowRight size={18} />
             </a>
@@ -780,8 +780,11 @@ export default function Page() {
       : "#fed7aa",
     "--accent-text": isDarkMode ? "#e0ad67" : "#ea580c",
     "--accent-contrast": isDarkMode ? "#17120b" : "#ffffff",
+    "--button-bg": "#f97316",
+    "--button-bg-hover": "#ea580c",
+    "--button-text": "#ffffff",
     "--button-shadow": isDarkMode
-      ? "rgba(214, 161, 95, 0.22)"
+      ? "rgba(249, 115, 22, 0.28)"
       : "rgba(249, 115, 22, 0.28)",
     "--card-shadow": isDarkMode
       ? "rgba(0, 0, 0, 0.28)"
