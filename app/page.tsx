@@ -778,7 +778,7 @@ export default function Page() {
     "--accent-soft-strong": isDarkMode
       ? "rgba(249, 115, 22, 0.32)"
       : "#fed7aa",
-    "--accent-text": "#ea580c",
+    "--accent-text": "#f97316",
     "--accent-contrast": "#ffffff",
     "--button-bg": "#f97316",
     "--button-bg-hover": "#ea580c",
