@@ -765,21 +765,21 @@ export default function Page() {
     "--soft-bg": isDarkMode ? "#171512" : "#fff7ed",
     "--text": isDarkMode ? "#f7f1e8" : "#111827",
     "--muted": isDarkMode ? "#c8bfb2" : "#4b5563",
-    "--border": isDarkMode ? "rgba(214, 161, 95, 0.2)" : "#fed7aa",
+    "--border": isDarkMode ? "rgba(249, 115, 22, 0.24)" : "#fed7aa",
     "--nav-bg": isDarkMode
       ? "rgba(18, 17, 15, 0.9)"
       : "rgba(255, 255, 255, 0.92)",
     "--dark-section": isDarkMode
       ? "linear-gradient(135deg, #14120f 0%, #1f1b15 56%, #2a2117 100%)"
       : "#111827",
-    "--accent": isDarkMode ? "#d6a15f" : "#f97316",
-    "--accent-strong": isDarkMode ? "#e0ad67" : "#ea580c",
-    "--accent-soft": isDarkMode ? "rgba(214, 161, 95, 0.13)" : "#ffedd5",
+    "--accent": "#f97316",
+    "--accent-strong": "#ea580c",
+    "--accent-soft": isDarkMode ? "rgba(249, 115, 22, 0.14)" : "#ffedd5",
     "--accent-soft-strong": isDarkMode
-      ? "rgba(214, 161, 95, 0.28)"
+      ? "rgba(249, 115, 22, 0.32)"
       : "#fed7aa",
-    "--accent-text": isDarkMode ? "#e0ad67" : "#ea580c",
-    "--accent-contrast": isDarkMode ? "#17120b" : "#ffffff",
+    "--accent-text": "#ea580c",
+    "--accent-contrast": "#ffffff",
     "--button-bg": "#f97316",
     "--button-bg-hover": "#ea580c",
     "--button-text": "#ffffff",
@@ -793,7 +793,7 @@ export default function Page() {
       ? "rgba(0, 0, 0, 0.38)"
       : "rgba(255, 237, 213, 0.95)",
     "--hero-glow-one": isDarkMode
-      ? "rgba(214, 161, 95, 0.08)"
+      ? "rgba(249, 115, 22, 0.08)"
       : "rgba(255, 237, 213, 0.78)",
     "--hero-glow-two": isDarkMode
       ? "rgba(255, 255, 255, 0.04)"
@@ -806,17 +806,17 @@ export default function Page() {
     "--on-dark-text": "#f8f5ef",
     "--on-dark-muted": isDarkMode ? "#d6cec3" : "#d1d5db",
     "--on-dark-border": isDarkMode
-      ? "rgba(214, 161, 95, 0.18)"
+      ? "rgba(249, 115, 22, 0.18)"
       : "rgba(255, 255, 255, 0.1)",
     "--on-dark-panel": isDarkMode
       ? "rgba(255, 255, 255, 0.055)"
       : "rgba(255, 255, 255, 0.05)",
     "--on-dark-panel-hover": isDarkMode
-      ? "rgba(214, 161, 95, 0.11)"
+      ? "rgba(249, 115, 22, 0.11)"
       : "rgba(255, 255, 255, 0.1)",
     "--contact-card": isDarkMode ? "#f8f1e7" : "#ffffff",
     "--contact-card-border": isDarkMode
-      ? "rgba(214, 161, 95, 0.3)"
+      ? "rgba(249, 115, 22, 0.3)"
       : "rgba(255, 255, 255, 0.1)",
   };
 
