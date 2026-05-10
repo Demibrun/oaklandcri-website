@@ -154,7 +154,7 @@ function ThemeToggle({ isDarkMode, setIsDarkMode }: ThemeToggleProps) {
     <button
       type="button"
       onClick={() => setIsDarkMode(!isDarkMode)}
-      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] shadow-sm transition hover:border-orange-400 hover:bg-orange-50"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] shadow-sm transition hover:border-[var(--accent)] hover:bg-[var(--accent-soft)]"
       aria-label="Toggle light and dark mode"
       title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
     >
@@ -170,7 +170,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--border)] bg-[var(--nav-bg)] backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
         <a href="#home" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-500 text-lg font-black text-white shadow-lg shadow-orange-200">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--accent)] text-lg font-black text-[var(--accent-contrast)] shadow-lg shadow-[var(--button-shadow)]">
             O
           </div>
 
@@ -178,7 +178,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
             <p className="text-lg font-black tracking-tight text-[var(--text)]">
               OaklandCRI
             </p>
-            <p className="text-xs font-medium uppercase tracking-[0.24em] text-orange-600">
+            <p className="text-xs font-medium uppercase tracking-[0.24em] text-[var(--accent-text)]">
               Real Estate
             </p>
           </div>
@@ -195,7 +195,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
                   ? "noopener noreferrer"
                   : undefined
               }
-              className="text-sm font-semibold text-[var(--muted)] transition hover:text-orange-600"
+              className="text-sm font-semibold text-[var(--muted)] transition hover:text-[var(--accent-text)]"
             >
               {link.label}
             </a>
@@ -207,7 +207,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
             href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-orange-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-orange-200 transition hover:bg-orange-600"
+            className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-bold text-[var(--accent-contrast)] shadow-lg shadow-[var(--button-shadow)] transition hover:bg-[var(--accent-strong)]"
           >
             Contact Us
           </a>
@@ -223,7 +223,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
             href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden rounded-full bg-orange-500 px-4 py-2 text-xs font-bold text-white sm:inline-flex"
+            className="hidden rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-bold text-[var(--accent-contrast)] sm:inline-flex"
           >
             Contact
           </a>
@@ -269,7 +269,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
-              className="rounded-full bg-orange-500 px-5 py-3 text-center text-sm font-bold text-white"
+              className="rounded-full bg-[var(--accent)] px-5 py-3 text-center text-sm font-bold text-[var(--accent-contrast)]"
             >
               Contact Us
             </a>
@@ -282,7 +282,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
 
 function SectionBadge({ children }: SectionBadgeProps) {
   return (
-    <span className="inline-flex rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-orange-600">
+    <span className="inline-flex rounded-full border border-[var(--accent-soft-strong)] bg-[var(--accent-soft)] px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-[var(--accent-text)]">
       {children}
     </span>
   );
@@ -294,8 +294,8 @@ function Hero() {
       id="home"
       className="relative overflow-hidden bg-[var(--bg)] pt-32 lg:pt-40"
     >
-      <div className="absolute -left-32 top-16 h-96 w-96 rounded-full bg-orange-100 blur-3xl opacity-60" />
-      <div className="absolute -right-32 top-72 h-96 w-96 rounded-full bg-orange-200 blur-3xl opacity-40" />
+      <div className="absolute -left-32 top-16 h-96 w-96 rounded-full bg-[var(--hero-glow-one)] blur-3xl" />
+      <div className="absolute -right-32 top-72 h-96 w-96 rounded-full bg-[var(--hero-glow-two)] blur-3xl" />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:pb-28">
         <div>
@@ -314,7 +314,7 @@ function Hero() {
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
             <a
               href="#services"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-7 py-4 text-sm font-black text-white shadow-xl shadow-orange-200 transition hover:bg-orange-600"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-7 py-4 text-sm font-black text-[var(--accent-contrast)] shadow-xl shadow-[var(--button-shadow)] transition hover:bg-[var(--accent-strong)]"
             >
               Explore Services <ArrowRight size={18} />
             </a>
@@ -323,7 +323,7 @@ function Hero() {
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-7 py-4 text-sm font-black text-[var(--text)] transition hover:border-orange-500 hover:text-orange-600"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-7 py-4 text-sm font-black text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent-text)]"
             >
               Contact Us
             </a>
@@ -349,7 +349,7 @@ function Hero() {
         </div>
 
         <div className="relative">
-          <div className="relative overflow-hidden rounded-[2rem] border-8 border-[var(--surface)] shadow-2xl shadow-orange-100">
+          <div className="relative overflow-hidden rounded-[2rem] border-8 border-[var(--surface)] shadow-2xl shadow-[var(--image-shadow)]">
             <Image
               src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=80"
               alt="Modern residential building"
@@ -362,17 +362,17 @@ function Hero() {
 
             <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-gray-950/10 to-transparent" />
 
-            <div className="absolute bottom-6 left-6 right-6 rounded-3xl bg-white/95 p-5 shadow-xl backdrop-blur">
+            <div className="absolute bottom-6 left-6 right-6 rounded-3xl bg-[var(--floating-panel)] p-5 shadow-xl backdrop-blur">
               <div className="flex items-start gap-4">
-                <div className="rounded-2xl bg-orange-100 p-3 text-orange-600">
+                <div className="rounded-2xl bg-[var(--accent-soft)] p-3 text-[var(--accent-text)]">
                   <ShieldCheck size={24} />
                 </div>
 
                 <div>
-                  <p className="font-black text-gray-950">
+                  <p className="font-black text-[var(--floating-text)]">
                     Professional property support
                   </p>
-                  <p className="mt-1 text-sm leading-6 text-gray-600">
+                  <p className="mt-1 text-sm leading-6 text-[var(--floating-muted)]">
                     From land acquisition to construction and investment
                     advisory.
                   </p>
@@ -415,7 +415,7 @@ function About() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
-              <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">
+              <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--accent-text)]">
                 Mission
               </p>
               <p className="mt-3 text-base leading-7 text-[var(--muted)]">
@@ -425,7 +425,7 @@ function About() {
             </div>
 
             <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
-              <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">
+              <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--accent-text)]">
                 Vision
               </p>
               <p className="mt-3 text-base leading-7 text-[var(--muted)]">
@@ -465,9 +465,9 @@ function Services() {
             return (
               <div
                 key={service.title}
-                className="group rounded-[1.75rem] border border-[var(--border)] bg-[var(--surface)] p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-100"
+                className="group rounded-[1.75rem] border border-[var(--border)] bg-[var(--surface)] p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--card-shadow)]"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-100 text-orange-600 transition group-hover:bg-orange-500 group-hover:text-white">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent-soft)] text-[var(--accent-text)] transition group-hover:bg-[var(--accent)] group-hover:text-[var(--accent-contrast)]">
                   <Icon size={26} />
                 </div>
 
@@ -501,7 +501,7 @@ function WhyChooseUs() {
             Built on trust, clarity, and quality execution.
           </h2>
 
-          <p className="mt-6 text-lg leading-8 text-gray-300">
+          <p className="mt-6 text-lg leading-8 text-[var(--on-dark-muted)]">
             Real estate decisions are significant. OaklandCRI helps clients move
             with better information, practical guidance, and dependable project
             support.
@@ -512,13 +512,13 @@ function WhyChooseUs() {
           {values.map((value) => (
             <div
               key={value}
-              className="flex items-start gap-3 rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur"
+              className="flex items-start gap-3 rounded-3xl border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5 backdrop-blur"
             >
               <CheckCircle2
-                className="mt-1 shrink-0 text-orange-400"
+                className="mt-1 shrink-0 text-[var(--accent-text)]"
                 size={22}
               />
-              <p className="font-semibold leading-7 text-gray-100">{value}</p>
+              <p className="font-semibold leading-7 text-[var(--on-dark-text)]">{value}</p>
             </div>
           ))}
         </div>
@@ -551,7 +551,7 @@ function Projects() {
           {projects.map((project) => (
             <article
               key={project.title}
-              className="overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] shadow-sm transition hover:shadow-xl hover:shadow-orange-100"
+              className="overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] shadow-sm transition hover:shadow-xl hover:shadow-[var(--card-shadow)]"
             >
               <div className="relative h-72 overflow-hidden">
                 <Image
@@ -563,7 +563,7 @@ function Projects() {
                   className="h-full w-full object-cover transition duration-700 hover:scale-105"
                 />
 
-                <div className="absolute left-5 top-5 rounded-full bg-white/95 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-orange-600 backdrop-blur">
+                <div className="absolute left-5 top-5 rounded-full bg-[var(--floating-panel)] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-text)] backdrop-blur">
                   {project.category}
                 </div>
               </div>
@@ -626,12 +626,12 @@ function FAQ() {
           {faqs.map((faq) => (
             <details
               key={faq.question}
-              className="group rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm open:shadow-lg open:shadow-orange-100"
+              className="group rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm open:shadow-lg open:shadow-[var(--card-shadow)]"
             >
               <summary className="cursor-pointer list-none text-lg font-black text-[var(--text)] marker:hidden">
                 <span className="flex items-center justify-between gap-4">
                   <span>{faq.question}</span>
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-600 transition group-open:rotate-45">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-text)] transition group-open:rotate-45">
                     +
                   </span>
                 </span>
@@ -661,7 +661,7 @@ function Contact() {
             Ready to discuss your property needs?
           </h2>
 
-          <p className="mt-6 text-lg leading-8 text-gray-300">
+          <p className="mt-6 text-lg leading-8 text-[var(--on-dark-muted)]">
             Send us a message on WhatsApp and the OaklandCRI team will follow up
             on your real estate, construction, or investment enquiry.
           </p>
@@ -669,38 +669,38 @@ function Contact() {
           <div className="mt-10 space-y-4">
             <a
               href="tel:+2347062874510"
-              className="flex items-center gap-4 rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:bg-white/10"
+              className="flex items-center gap-4 rounded-3xl border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5 transition hover:bg-[var(--on-dark-panel-hover)]"
             >
-              <Phone className="text-orange-400" size={24} />
+              <Phone className="text-[var(--accent-text)]" size={24} />
               <span className="font-semibold">0706 287 4510</span>
             </a>
 
             <a
               href="mailto:hello@oaklandcri.com"
-              className="flex items-center gap-4 rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:bg-white/10"
+              className="flex items-center gap-4 rounded-3xl border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5 transition hover:bg-[var(--on-dark-panel-hover)]"
             >
-              <Mail className="text-orange-400" size={24} />
+              <Mail className="text-[var(--accent-text)]" size={24} />
               <span className="font-semibold">hello@oaklandcri.com</span>
             </a>
 
-            <div className="flex items-center gap-4 rounded-3xl border border-white/10 bg-white/5 p-5">
-              <MapPin className="text-orange-400" size={24} />
+            <div className="flex items-center gap-4 rounded-3xl border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5">
+              <MapPin className="text-[var(--accent-text)]" size={24} />
               <span className="font-semibold">Nigeria</span>
             </div>
           </div>
         </div>
 
-        <div className="rounded-[2rem] border border-white/10 bg-white p-6 text-gray-950 shadow-2xl shadow-black/20 lg:p-8">
-          <div className="rounded-3xl bg-orange-50 p-6">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-500 text-white">
+        <div className="rounded-[2rem] border border-[var(--contact-card-border)] bg-[var(--contact-card)] p-6 text-[var(--floating-text)] shadow-2xl shadow-black/20 lg:p-8">
+          <div className="rounded-3xl bg-[var(--accent-soft)] p-6">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--accent)] text-[var(--accent-contrast)]">
               <MessageCircle size={32} />
             </div>
 
-            <h3 className="mt-6 text-3xl font-black text-gray-950">
+            <h3 className="mt-6 text-3xl font-black text-[var(--floating-text)]">
               Chat with OaklandCRI on WhatsApp
             </h3>
 
-            <p className="mt-4 leading-7 text-gray-600">
+            <p className="mt-4 leading-7 text-[var(--floating-muted)]">
               Click the button below to start a WhatsApp conversation about land,
               construction, property investment, site inspection, or any other
               real estate enquiry.
@@ -710,22 +710,22 @@ function Contact() {
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-orange-500 px-7 py-4 text-sm font-black text-white shadow-xl shadow-orange-200 transition hover:bg-orange-600"
+              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-7 py-4 text-sm font-black text-[var(--accent-contrast)] shadow-xl shadow-[var(--button-shadow)] transition hover:bg-[var(--accent-strong)]"
             >
               Start WhatsApp Chat <ArrowRight size={18} />
             </a>
           </div>
 
-          <div className="mt-6 rounded-3xl border border-orange-100 p-6">
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-600">
+          <div className="mt-6 rounded-3xl border border-[var(--accent-soft-strong)] p-6">
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--accent-text)]">
               Direct Contact
             </p>
 
-            <p className="mt-3 text-2xl font-black text-gray-950">
+            <p className="mt-3 text-2xl font-black text-[var(--floating-text)]">
               0706 287 4510
             </p>
 
-            <p className="mt-3 leading-7 text-gray-600">
+            <p className="mt-3 leading-7 text-[var(--floating-muted)]">
               We recommend sending a short message with your name, location, and
               the service you are interested in.
             </p>
@@ -759,19 +759,62 @@ export default function Page() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const themeStyles: ThemeStyles = {
-    "--bg": isDarkMode ? "#07111f" : "#ffffff",
-    "--surface": isDarkMode ? "#101b2d" : "#ffffff",
-    "--surface-2": isDarkMode ? "#14213a" : "#fff7ed",
-    "--soft-bg": isDarkMode ? "#0b1728" : "#fff7ed",
-    "--text": isDarkMode ? "#f8fafc" : "#111827",
-    "--muted": isDarkMode ? "#cbd5e1" : "#4b5563",
-    "--border": isDarkMode ? "rgba(251, 146, 60, 0.22)" : "#fed7aa",
+    "--bg": isDarkMode ? "#12110f" : "#ffffff",
+    "--surface": isDarkMode ? "#1a1815" : "#ffffff",
+    "--surface-2": isDarkMode ? "#211e19" : "#fff7ed",
+    "--soft-bg": isDarkMode ? "#171512" : "#fff7ed",
+    "--text": isDarkMode ? "#f7f1e8" : "#111827",
+    "--muted": isDarkMode ? "#c8bfb2" : "#4b5563",
+    "--border": isDarkMode ? "rgba(214, 161, 95, 0.2)" : "#fed7aa",
     "--nav-bg": isDarkMode
-      ? "rgba(7, 17, 31, 0.92)"
+      ? "rgba(18, 17, 15, 0.9)"
       : "rgba(255, 255, 255, 0.92)",
     "--dark-section": isDarkMode
-      ? "linear-gradient(135deg, #020617 0%, #0f172a 45%, #431407 100%)"
+      ? "linear-gradient(135deg, #14120f 0%, #1f1b15 56%, #2a2117 100%)"
       : "#111827",
+    "--accent": isDarkMode ? "#d6a15f" : "#f97316",
+    "--accent-strong": isDarkMode ? "#e0ad67" : "#ea580c",
+    "--accent-soft": isDarkMode ? "rgba(214, 161, 95, 0.13)" : "#ffedd5",
+    "--accent-soft-strong": isDarkMode
+      ? "rgba(214, 161, 95, 0.28)"
+      : "#fed7aa",
+    "--accent-text": isDarkMode ? "#e0ad67" : "#ea580c",
+    "--accent-contrast": isDarkMode ? "#17120b" : "#ffffff",
+    "--button-shadow": isDarkMode
+      ? "rgba(214, 161, 95, 0.22)"
+      : "rgba(249, 115, 22, 0.28)",
+    "--card-shadow": isDarkMode
+      ? "rgba(0, 0, 0, 0.28)"
+      : "rgba(255, 237, 213, 0.95)",
+    "--image-shadow": isDarkMode
+      ? "rgba(0, 0, 0, 0.38)"
+      : "rgba(255, 237, 213, 0.95)",
+    "--hero-glow-one": isDarkMode
+      ? "rgba(214, 161, 95, 0.08)"
+      : "rgba(255, 237, 213, 0.78)",
+    "--hero-glow-two": isDarkMode
+      ? "rgba(255, 255, 255, 0.04)"
+      : "rgba(254, 215, 170, 0.62)",
+    "--floating-panel": isDarkMode
+      ? "rgba(247, 241, 232, 0.94)"
+      : "rgba(255, 255, 255, 0.95)",
+    "--floating-text": isDarkMode ? "#171512" : "#030712",
+    "--floating-muted": isDarkMode ? "#665a4b" : "#4b5563",
+    "--on-dark-text": "#f8f5ef",
+    "--on-dark-muted": isDarkMode ? "#d6cec3" : "#d1d5db",
+    "--on-dark-border": isDarkMode
+      ? "rgba(214, 161, 95, 0.18)"
+      : "rgba(255, 255, 255, 0.1)",
+    "--on-dark-panel": isDarkMode
+      ? "rgba(255, 255, 255, 0.055)"
+      : "rgba(255, 255, 255, 0.05)",
+    "--on-dark-panel-hover": isDarkMode
+      ? "rgba(214, 161, 95, 0.11)"
+      : "rgba(255, 255, 255, 0.1)",
+    "--contact-card": isDarkMode ? "#f8f1e7" : "#ffffff",
+    "--contact-card-border": isDarkMode
+      ? "rgba(214, 161, 95, 0.3)"
+      : "rgba(255, 255, 255, 0.1)",
   };
 
   return (
