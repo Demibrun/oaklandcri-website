@@ -18,6 +18,7 @@ import {
   CheckCircle2,
   Warehouse,
   MessageCircle,
+  Plus,
   Sun,
   Moon,
   FileCheck2,
@@ -1264,27 +1265,55 @@ function Footer() {
 }
 
 function MobileContactBar() {
-  return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--border)] bg-[var(--surface)]/95 px-4 py-3 shadow-2xl shadow-black/20 backdrop-blur lg:hidden">
-      <div className="mx-auto grid max-w-md grid-cols-2 gap-3">
-        <a
-          href={whatsappLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[var(--button-bg)] px-4 text-sm font-black text-[var(--button-text)]"
-        >
-          <MessageCircle size={17} />
-          WhatsApp
-        </a>
+  const [isOpen, setIsOpen] = useState(false);
 
-        <a
-          href={emailLink}
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--soft-bg)] px-4 text-sm font-black text-[var(--text)]"
+  return (
+    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3 lg:hidden">
+      {isOpen && (
+        <div className="flex flex-col items-end gap-3">
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500 text-white shadow-xl shadow-black/25 transition hover:bg-green-600"
+            aria-label="Contact Oakland CRI on WhatsApp"
+          >
+            <MessageCircle size={22} />
+          </a>
+
+          <a
+            href={emailLink}
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--surface)] text-[var(--accent-text)] shadow-xl shadow-black/20 ring-1 ring-[var(--border)] transition hover:bg-[var(--accent-soft)]"
+            aria-label="Email Oakland CRI"
+          >
+            <Mail size={22} />
+          </a>
+        </div>
+      )}
+
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="relative grid h-14 w-14 place-items-center rounded-full bg-[var(--button-bg)] text-[var(--button-text)] shadow-2xl shadow-[var(--button-shadow)] transition hover:bg-[var(--button-bg-hover)]"
+        aria-label={isOpen ? "Close contact options" : "Open contact options"}
+        aria-expanded={isOpen}
+      >
+        <span className="absolute inset-0 grid place-items-center">
+          <X
+            size={26}
+            className={`transition duration-200 ${
+              isOpen ? "rotate-0 opacity-100" : "-rotate-45 opacity-0"
+            }`}
+          />
+        </span>
+        <span
+          className={`absolute inset-0 grid place-items-center transition duration-200 ${
+            isOpen ? "rotate-45 opacity-0" : "rotate-0 opacity-100"
+          }`}
         >
-          <Mail size={17} />
-          Email
-        </a>
-      </div>
+          <Plus size={28} />
+        </span>
+      </button>
     </div>
   );
 }
