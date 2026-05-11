@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Oakland CRI",
+  title: "Oakland CRI Company Limited",
   description:
     "Real estate, construction, building materials supply, and property investment solutions.",
 };

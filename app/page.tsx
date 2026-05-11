@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState, type CSSProperties } from "react";
+import React, { useEffect, useState, type CSSProperties } from "react";
 import {
   ArrowRight,
   Building2,
@@ -10,14 +10,12 @@ import {
   Landmark,
   MapPin,
   Menu,
-  Phone,
   Mail,
   ShieldCheck,
   TrendingUp,
   X,
   CheckCircle2,
   Warehouse,
-  MessageCircle,
   Plus,
   Sun,
   Moon,
@@ -49,9 +47,21 @@ type NavbarProps = {
 const emailAddress = "info@oaklandcri.com";
 const enquiryMessage =
   "Hello Oakland CRI,%0A%0AName:%0ALocation:%0AProject type:%0AService needed:%0A%0A";
-const whatsappLink = `https://wa.me/2347062874510?text=${enquiryMessage}`;
+const whatsappContacts = [
+  {
+    label: "0705 291 9101",
+    phoneHref: "tel:+2347052919101",
+    whatsappHref: `https://wa.me/2347052919101?text=${enquiryMessage}`,
+  },
+  {
+    label: "0806 301 7616",
+    phoneHref: "tel:+2348063017616",
+    whatsappHref: `https://wa.me/2348063017616?text=${enquiryMessage}`,
+  },
+];
 const emailLink = `mailto:${emailAddress}?subject=Project%20Enquiry&body=${enquiryMessage}`;
 const brandName = "Oakland CRI";
+const companyLegalName = "Oakland CRI Company Limited";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -100,6 +110,21 @@ const services = [
   },
 ];
 
+const missionVisionItems = [
+  {
+    label: "Mission",
+    title: "Deliver dependable property solutions.",
+    description:
+      "Reliable construction, real estate, supply, and investment solutions.",
+  },
+  {
+    label: "Vision",
+    title: "Build lasting trust across every project.",
+    description:
+      "A trusted name in property development, civil works, and materials supply.",
+  },
+];
+
 const pillars = [
   {
     title: "Verified Property Access",
@@ -124,83 +149,6 @@ const pillars = [
     description:
       "Sourcing and supply for materials, equipment, hardware, and finishes.",
     icon: Truck,
-  },
-];
-
-const companyObjects = [
-  {
-    label: "Build",
-    title: "Construction",
-    summary:
-      "Civil works, structures, roads, drainage, renovation, and maintenance.",
-  },
-  {
-    label: "Develop",
-    title: "Real estate",
-    summary:
-      "Development, acquisition, sale, leasing, and estate management.",
-  },
-  {
-    label: "Supply",
-    title: "Materials",
-    summary:
-      "Building materials, equipment, hardware, fittings, and finishes.",
-  },
-  {
-    label: "Partner",
-    title: "Partnerships",
-    summary:
-      "Contracts, ventures, approvals, consultants, and professional teams.",
-  },
-];
-
-const processSteps = [
-  {
-    step: "01",
-    title: "Brief",
-    description: "Clarify the goal, location, scope, and service need.",
-  },
-  {
-    step: "02",
-    title: "Verify",
-    description: "Review the property, site, documents, or supply requirement.",
-  },
-  {
-    step: "03",
-    title: "Plan",
-    description: "Set the practical path for acquisition, build, investment, or supply.",
-  },
-  {
-    step: "04",
-    title: "Execute",
-    description: "Coordinate people, materials, approvals, and delivery steps.",
-  },
-];
-
-const projects = [
-  {
-    title: "Residential Construction",
-    category: "Build & Finish",
-    description:
-      "Homes and estate concepts built for quality and long-term value.",
-    image:
-      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "Property Investment",
-    category: "Investment Advisory",
-    description:
-      "Property opportunities shaped around location, demand, and asset value.",
-    image:
-      "https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "Materials Supply",
-    category: "Procurement",
-    description:
-      "Supply coordination for materials, project inputs, and site needs.",
-    image:
-      "https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 
@@ -303,8 +251,8 @@ function Navbar({ isDarkMode, setIsDarkMode, onOpenFaq }: NavbarProps) {
           </div>
 
           <div>
-            <p className="text-lg font-black tracking-tight text-[var(--text)]">
-              {brandName}
+            <p className="max-w-[170px] text-sm font-black leading-tight tracking-tight text-[var(--text)] sm:max-w-none sm:text-lg">
+              {companyLegalName}
             </p>
             <p className="text-xs font-medium uppercase tracking-[0.24em] text-[var(--accent-text)]">
               Real Estate
@@ -433,7 +381,8 @@ function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[82svh] overflow-hidden bg-gray-950 pt-24 text-white sm:pt-28 lg:min-h-[92vh] lg:pt-36"
+      data-reveal
+      className="reveal-section relative min-h-[82svh] overflow-hidden bg-gray-950 pt-24 text-white sm:pt-28 lg:min-h-[92vh] lg:pt-36"
     >
       <div
         className="absolute inset-0 scale-110 bg-cover bg-center bg-no-repeat lg:bg-fixed"
@@ -569,8 +518,23 @@ function Hero() {
 }
 
 function About() {
+  const [activeStatement, setActiveStatement] = useState(0);
+  const currentStatement = missionVisionItems[activeStatement];
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveStatement((index) => (index + 1) % missionVisionItems.length);
+    }, 4500);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
   return (
-    <section id="about" className="bg-[var(--soft-bg)] py-14 lg:py-28">
+    <section
+      id="about"
+      data-reveal
+      className="reveal-section bg-[var(--soft-bg)] py-12 lg:py-20"
+    >
       <div className="mx-auto grid max-w-7xl gap-8 px-5 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:px-8">
         <div>
           <SectionBadge>About {brandName}</SectionBadge>
@@ -580,14 +544,14 @@ function About() {
             well.
           </h2>
 
-          <div className="mt-8 hidden overflow-hidden rounded-xl border border-[var(--border)] shadow-lg shadow-[var(--card-shadow)] md:block">
+          <div className="mt-6 hidden overflow-hidden rounded-xl border border-[var(--border)] shadow-lg shadow-[var(--card-shadow)] md:block">
             <Image
               src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1000&q=80"
               alt="Construction worker reviewing site progress"
               width={1000}
               height={667}
               sizes="(min-width: 1024px) 38vw, 100vw"
-              className="h-80 w-full object-cover"
+              className="h-64 w-full object-cover lg:h-72"
             />
           </div>
         </div>
@@ -598,26 +562,37 @@ function About() {
             greater clarity and confidence.
           </p>
 
-          <div className="grid gap-3 sm:grid-cols-2 lg:gap-4">
-            <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm lg:p-6">
+          <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm lg:p-6">
+            <div className="flex items-center justify-between gap-4">
               <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--accent-text)]">
-                Mission
+                {currentStatement.label}
               </p>
-              <p className="mt-3 text-base leading-7 text-[var(--muted)]">
-                Reliable construction, real estate, supply, and investment
-                solutions.
-              </p>
+
+              <div className="flex gap-2" aria-label="Mission and vision controls">
+                {missionVisionItems.map((item, index) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={() => setActiveStatement(index)}
+                    className={`h-2.5 rounded-full transition ${
+                      activeStatement === index
+                        ? "w-7 bg-[var(--accent)]"
+                        : "w-2.5 bg-[var(--border)]"
+                    }`}
+                    aria-label={`Show ${item.label}`}
+                    aria-pressed={activeStatement === index}
+                  />
+                ))}
+              </div>
             </div>
 
-            <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm lg:p-6">
-              <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--accent-text)]">
-                Vision
-              </p>
-              <p className="mt-3 text-base leading-7 text-[var(--muted)]">
-                A trusted name in property development, civil works, and
-                materials supply.
-              </p>
-            </div>
+            <h3 className="mt-4 text-xl font-black leading-7 text-[var(--text)]">
+              {currentStatement.title}
+            </h3>
+
+            <p className="mt-3 text-base leading-7 text-[var(--muted)]">
+              {currentStatement.description}
+            </p>
           </div>
         </div>
       </div>
@@ -627,7 +602,10 @@ function About() {
 
 function Pillars() {
   return (
-    <section className="bg-[var(--bg)] py-14 lg:py-28">
+    <section
+      data-reveal
+      className="reveal-section bg-[var(--bg)] py-12 lg:py-20"
+    >
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-3xl">
@@ -644,7 +622,7 @@ function Pillars() {
           </p>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-2 lg:mt-12 lg:grid-cols-4 lg:gap-5">
+        <div className="mt-7 grid grid-cols-2 gap-3 md:grid-cols-2 lg:mt-9 lg:grid-cols-4 lg:gap-5">
           {pillars.map((pillar) => {
             const Icon = pillar.icon;
 
@@ -673,95 +651,13 @@ function Pillars() {
   );
 }
 
-function CompanyObjects() {
-  return (
-    <section className="hidden bg-[var(--soft-bg)] py-20 md:block lg:py-28">
-      <div className="mx-auto max-w-7xl px-5 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <div>
-            <SectionBadge>Company Objects</SectionBadge>
-
-            <h2 className="mt-6 text-4xl font-black tracking-tight text-[var(--text)] md:text-5xl">
-              Four areas. One coordinated company.
-            </h2>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2">
-            {companyObjects.map((item, index) => (
-              <article
-                key={item.title}
-                className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <span className="rounded-full bg-[var(--accent-soft)] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[var(--accent-text)]">
-                    {item.label}
-                  </span>
-                  <span className="text-sm font-black text-[var(--muted)]">
-                    0{index + 1}
-                  </span>
-                </div>
-
-                <h3 className="mt-5 text-xl font-black text-[var(--text)]">
-                  {item.title}
-                </h3>
-
-                <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-                  {item.summary}
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function WorkProcess() {
-  return (
-    <section className="bg-[var(--bg)] py-14 lg:py-24">
-      <div className="mx-auto max-w-7xl px-5 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
-          <div>
-            <SectionBadge>How We Work</SectionBadge>
-
-            <h2 className="mt-5 text-3xl font-black tracking-tight text-[var(--text)] sm:text-4xl md:text-5xl">
-              A clearer path from enquiry to execution.
-            </h2>
-          </div>
-
-          <p className="text-base leading-7 text-[var(--muted)] sm:text-lg sm:leading-8">
-            A simple sequence for property, construction, investment, and
-            supply work.
-          </p>
-        </div>
-
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4 lg:gap-4">
-          {processSteps.map((item) => (
-            <article
-              key={item.step}
-              className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm sm:p-6"
-            >
-              <p className="text-sm font-black text-[var(--accent-text)]">
-                {item.step}
-              </p>
-              <h3 className="mt-3 text-lg font-black text-[var(--text)] sm:mt-4 sm:text-xl">
-                {item.title}
-              </h3>
-              <p className="mt-2 hidden text-sm leading-6 text-[var(--muted)] sm:block sm:text-base sm:leading-7">
-                {item.description}
-              </p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Services() {
   return (
-    <section id="services" className="bg-[var(--bg)] py-14 lg:py-28">
+    <section
+      id="services"
+      data-reveal
+      className="reveal-section bg-[var(--bg)] py-12 lg:py-20"
+    >
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <SectionBadge>Our Services</SectionBadge>
@@ -772,29 +668,33 @@ function Services() {
           </h2>
         </div>
 
-        <div className="mt-8 grid gap-3 md:grid-cols-2 lg:mt-14 lg:grid-cols-3 lg:gap-6">
+        <div className="mt-7 overflow-x-auto pb-3 lg:mt-10 lg:overflow-visible lg:pb-0">
+          <div className="relative flex min-w-max items-start justify-between gap-5 px-1 pt-2 lg:min-w-0 lg:gap-4 lg:px-0">
+            <div className="absolute left-8 right-8 top-8 h-px bg-[var(--border)]" />
+
           {services.map((service) => {
             const Icon = service.icon;
 
             return (
-              <div
+              <article
                 key={service.title}
-                className="group flex items-center gap-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--card-shadow)] lg:block lg:p-7"
+                className="group relative z-10 flex w-28 shrink-0 flex-col items-center text-center sm:w-36 lg:w-auto lg:flex-1 lg:shrink"
               >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent-text)] transition group-hover:bg-[var(--accent)] group-hover:text-[var(--accent-contrast)] lg:h-14 lg:w-14">
-                  <Icon size={22} />
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--accent-text)] shadow-lg shadow-[var(--card-shadow)] transition group-hover:-translate-y-1 group-hover:bg-[var(--accent)] group-hover:text-[var(--accent-contrast)]">
+                  <Icon size={21} />
                 </div>
 
-                <h3 className="text-base font-black text-[var(--text)] lg:mt-6 lg:text-xl">
+                <h3 className="mt-3 text-xs font-black leading-5 text-[var(--text)] sm:text-sm lg:text-base">
                   {service.title}
                 </h3>
 
-                <p className="mt-3 hidden leading-7 text-[var(--muted)] lg:block">
+                <p className="mt-2 hidden max-w-44 text-sm leading-6 text-[var(--muted)] lg:block">
                   {service.description}
                 </p>
-              </div>
+              </article>
             );
           })}
+          </div>
         </div>
       </div>
     </section>
@@ -804,7 +704,8 @@ function Services() {
 function WhyChooseUs() {
   return (
     <section
-      className="py-14 text-white lg:py-28"
+      data-reveal
+      className="reveal-section py-12 text-white lg:py-20"
       style={{ background: "var(--dark-section)" }}
     >
       <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[1fr_1fr] lg:px-8">
@@ -862,7 +763,7 @@ function ProjectDashboard() {
   const [activeTab, setActiveTab] = useState(dashboardTabs[0]);
 
   return (
-    <div className="mt-10 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-3 shadow-xl shadow-[var(--card-shadow)] sm:p-4 lg:mt-16 lg:p-6">
+    <div className="mt-8 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-3 shadow-xl shadow-[var(--card-shadow)] sm:p-4 lg:mt-10 lg:p-6">
       <div className="flex flex-col gap-4 border-b border-[var(--border)] pb-4 lg:flex-row lg:items-center lg:justify-between lg:pb-5">
         <div>
           <div className="flex items-center gap-3">
@@ -903,7 +804,7 @@ function ProjectDashboard() {
       </div>
 
       <div className="grid gap-4 pt-4 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch lg:gap-6 lg:pt-6">
-        <div className="relative min-h-52 overflow-hidden rounded-lg sm:min-h-64 lg:min-h-80">
+        <div className="relative min-h-48 overflow-hidden rounded-lg sm:min-h-60 lg:min-h-64">
           <Image
             src={activeTab.image}
             alt={activeTab.title}
@@ -953,54 +854,24 @@ function ProjectDashboard() {
 
 function Projects() {
   return (
-    <section id="projects" className="bg-[var(--bg)] py-14 lg:py-28">
+    <section
+      id="projects"
+      data-reveal
+      className="reveal-section bg-[var(--bg)] py-12 lg:py-20"
+    >
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-3xl">
-            <SectionBadge>Project Areas</SectionBadge>
+            <SectionBadge>Project Dashboard</SectionBadge>
 
             <h2 className="mt-5 text-3xl font-black tracking-tight text-[var(--text)] md:text-5xl">
-              Property solutions Oakland CRI is positioned to deliver.
+              Construction, investment, and supply at a glance.
             </h2>
           </div>
 
           <p className="max-w-md text-base leading-7 text-[var(--muted)]">
-            Construction, investment, and supply in one view.
+            A compact view of the work Oakland CRI is positioned to deliver.
           </p>
-        </div>
-
-        <div className="mt-8 grid gap-4 lg:mt-14 lg:grid-cols-3 lg:gap-7">
-          {projects.map((project) => (
-            <article
-              key={project.title}
-              className="overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface)] shadow-sm transition hover:shadow-xl hover:shadow-[var(--card-shadow)]"
-            >
-              <div className="relative h-52 overflow-hidden lg:h-72">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  width={1200}
-                  height={800}
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="h-full w-full object-cover transition duration-700 hover:scale-105"
-                />
-
-                <div className="absolute left-5 top-5 rounded-full bg-[var(--floating-panel)] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-text)] backdrop-blur">
-                  {project.category}
-                </div>
-              </div>
-
-              <div className="p-5 lg:p-7">
-                <h3 className="text-xl font-black text-[var(--text)] lg:text-2xl">
-                  {project.title}
-                </h3>
-
-                <p className="mt-3 hidden leading-7 text-[var(--muted)] sm:block">
-                  {project.description}
-                </p>
-              </div>
-            </article>
-          ))}
         </div>
 
         <ProjectDashboard />
@@ -1011,7 +882,10 @@ function Projects() {
 
 function ReadyStart() {
   return (
-    <section className="bg-[var(--soft-bg)] py-14 lg:py-24">
+    <section
+      data-reveal
+      className="reveal-section bg-[var(--soft-bg)] py-12 lg:py-20"
+    >
       <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-8">
         <div>
           <SectionBadge>Ready To Start</SectionBadge>
@@ -1034,7 +908,7 @@ function ReadyStart() {
         </div>
 
         <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3 shadow-2xl shadow-[var(--card-shadow)]">
-          <div className="relative h-72 overflow-hidden rounded-xl sm:h-[430px]">
+          <div className="relative h-60 overflow-hidden rounded-xl sm:h-80 lg:h-96">
             <Image
               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80"
               alt="Modern residential property exterior"
@@ -1136,15 +1010,16 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="py-14 text-white lg:py-28"
+      data-reveal
+      className="reveal-section py-12 text-white lg:py-20"
       style={{ background: "var(--dark-section)" }}
     >
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+      <div className="mx-auto max-w-4xl px-5 lg:px-8">
         <div>
           <SectionBadge>Contact Us</SectionBadge>
 
           <h2 className="mt-5 text-3xl font-black tracking-tight text-white md:text-5xl">
-            Ready to start your project?
+            Contact Oakland CRI Company Limited.
           </h2>
 
           <p className="mt-6 text-lg leading-8 text-[var(--on-dark-muted)]">
@@ -1152,13 +1027,22 @@ function Contact() {
           </p>
 
           <div className="mt-8 space-y-3 lg:mt-10 lg:space-y-4">
-            <a
-              href="tel:+2347062874510"
-              className="flex items-center gap-4 rounded-lg border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5 transition hover:bg-[var(--on-dark-panel-hover)]"
-            >
-              <Phone className="text-[var(--accent-text)]" size={24} />
-              <span className="font-semibold">0706 287 4510</span>
-            </a>
+            {whatsappContacts.map((contact, index) => (
+              <a
+                key={contact.label}
+                href={contact.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 rounded-lg border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5 transition hover:bg-[var(--on-dark-panel-hover)]"
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-green-500 text-sm font-black text-white">
+                  {index + 1}
+                </span>
+                <span className="font-semibold">
+                  WhatsApp {index + 1}: {contact.label}
+                </span>
+              </a>
+            ))}
 
             <a
               href={emailLink}
@@ -1174,72 +1058,6 @@ function Contact() {
             </div>
           </div>
         </div>
-
-        <div className="rounded-2xl border border-[var(--contact-card-border)] bg-[var(--contact-card)] p-5 text-[var(--floating-text)] shadow-2xl shadow-black/20 lg:rounded-[2rem] lg:p-8">
-          <div className="rounded-lg bg-[var(--accent-soft)] p-5 lg:p-6">
-            <h3 className="text-2xl font-black text-[var(--floating-text)] lg:text-3xl">
-              Choose how to reach Oakland CRI
-            </h3>
-
-            <p className="mt-4 leading-7 text-[var(--floating-muted)]">
-              Send your project details through either channel.
-            </p>
-
-            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:mt-8 lg:gap-4">
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group rounded-lg border border-[var(--accent-soft-strong)] bg-[var(--surface)] p-4 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--card-shadow)] lg:p-5"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[var(--accent)] text-[var(--accent-contrast)]">
-                  <MessageCircle size={24} />
-                </div>
-                <p className="mt-5 text-xl font-black text-[var(--floating-text)]">
-                  WhatsApp
-                </p>
-                <p className="mt-2 text-sm leading-6 text-[var(--floating-muted)]">
-                  Quick enquiries and site inspections.
-                </p>
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[var(--accent-text)]">
-                  Start chat <ArrowRight size={16} />
-                </span>
-              </a>
-
-              <a
-                href={emailLink}
-                className="group rounded-lg border border-[var(--accent-soft-strong)] bg-[var(--surface)] p-4 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--card-shadow)] lg:p-5"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[var(--accent)] text-[var(--accent-contrast)]">
-                  <Mail size={24} />
-                </div>
-                <p className="mt-5 text-xl font-black text-[var(--floating-text)]">
-                  Email
-                </p>
-                <p className="mt-2 text-sm leading-6 text-[var(--floating-muted)]">
-                  Formal briefs, documents, and quotations.
-                </p>
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[var(--accent-text)]">
-                  Send email <ArrowRight size={16} />
-                </span>
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-6 hidden rounded-lg border border-[var(--accent-soft-strong)] p-6 sm:block">
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--accent-text)]">
-              Direct Contact
-            </p>
-
-            <p className="mt-3 text-2xl font-black text-[var(--floating-text)]">
-              0706 287 4510
-            </p>
-
-            <p className="mt-3 leading-7 text-[var(--floating-muted)]">
-              Include your name, location, and project type.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -1247,17 +1065,22 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--bg)] py-8">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 text-center sm:flex-row sm:text-left lg:px-8">
+    <footer
+      data-reveal
+      className="reveal-section border-t border-[var(--border)] bg-[var(--bg)] py-4 lg:py-8"
+    >
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 text-center sm:flex-row sm:gap-4 sm:text-left lg:px-8">
         <div>
-          <p className="text-lg font-black text-[var(--text)]">Oakland CRI</p>
-          <p className="text-sm text-[var(--muted)]">
+          <p className="text-base font-black text-[var(--text)] sm:text-lg">
+            {companyLegalName}
+          </p>
+          <p className="hidden text-sm text-[var(--muted)] sm:block">
             Real estate, construction, and property investment solutions.
           </p>
         </div>
 
-        <p className="text-sm text-[var(--muted)]">
-          Copyright 2026 Oakland CRI. All rights reserved.
+        <p className="text-xs text-[var(--muted)] sm:text-sm">
+          Copyright 2026 {companyLegalName}. All rights reserved.
         </p>
       </div>
     </footer>
@@ -1271,15 +1094,19 @@ function MobileContactBar() {
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3 lg:hidden">
       {isOpen && (
         <div className="flex flex-col items-end gap-3">
-          <a
-            href={whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500 text-white shadow-xl shadow-black/25 transition hover:bg-green-600"
-            aria-label="Contact Oakland CRI on WhatsApp"
-          >
-            <MessageCircle size={22} />
-          </a>
+          {whatsappContacts.map((contact, index) => (
+            <a
+              key={contact.label}
+              href={contact.whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500 text-white shadow-xl shadow-black/25 transition hover:bg-green-600"
+              aria-label={`Contact Oakland CRI on WhatsApp at ${contact.label}`}
+              title={contact.label}
+            >
+              <span className="text-base font-black">{index + 1}</span>
+            </a>
+          ))}
 
           <a
             href={emailLink}
@@ -1318,9 +1145,71 @@ function MobileContactBar() {
   );
 }
 
+function BrandedLoader() {
+  return (
+    <div className="loader-screen fixed inset-0 z-[90] grid place-items-center overflow-hidden bg-[#111827]">
+      <div className="loader-orange absolute inset-0 bg-[var(--accent)]" />
+      <div className="relative flex flex-col items-center gap-5">
+        <div className="loader-o text-6xl font-black text-white">
+          O
+        </div>
+
+        <div className="loader-copy text-center">
+          <p className="text-xl font-black tracking-tight text-white">
+            Oakland CRI Company Limited
+          </p>
+          <p className="mt-2 text-xs font-bold uppercase tracking-[0.24em] text-orange-200">
+            Building value
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Page() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isFaqOpen, setIsFaqOpen] = useState(false);
+
+  useEffect(() => {
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-reveal]"),
+    );
+
+    if (!("IntersectionObserver" in window)) {
+      sections.forEach((section) => section.classList.add("reveal-visible"));
+      return;
+    }
+
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+
+      if (rect.top < window.innerHeight * 0.9) {
+        section.classList.add("reveal-visible");
+      }
+    });
+
+    document.documentElement.classList.add("reveal-ready");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.14,
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
 
   const themeStyles: ThemeStyles = {
     "--bg": isDarkMode ? "#12110f" : "#ffffff",
@@ -1381,7 +1270,7 @@ export default function Page() {
   return (
     <main
       style={themeStyles}
-      className="min-h-screen scroll-smooth bg-[var(--bg)] pb-24 font-sans text-[var(--text)] transition-colors duration-300 lg:pb-0"
+      className="min-h-screen scroll-smooth bg-[var(--bg)] font-sans text-[var(--text)] transition-colors duration-300"
     >
       <Navbar
         isDarkMode={isDarkMode}
@@ -1391,8 +1280,6 @@ export default function Page() {
       <Hero />
       <About />
       <Pillars />
-      <CompanyObjects />
-      <WorkProcess />
       <Services />
       <WhyChooseUs />
       <Projects />
@@ -1401,6 +1288,7 @@ export default function Page() {
       <Footer />
       <MobileContactBar />
       <FAQModal isOpen={isFaqOpen} onClose={() => setIsFaqOpen(false)} />
+      <BrandedLoader />
     </main>
   );
 }
