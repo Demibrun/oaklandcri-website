@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OaklandCRI",
-  description: "Real estate, construction, and property investment solutions.",
+  title: "Oakland CRI",
+  description:
+    "Real estate, construction, building materials supply, and property investment solutions.",
 };
 
 export default function RootLayout({

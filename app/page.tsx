@@ -20,6 +20,10 @@ import {
   MessageCircle,
   Sun,
   Moon,
+  FileCheck2,
+  Layers3,
+  Ruler,
+  Truck,
 } from "lucide-react";
 
 type ThemeStyles = CSSProperties & {
@@ -38,82 +42,203 @@ type ThemeToggleProps = {
 type NavbarProps = {
   isDarkMode: boolean;
   setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+  onOpenFaq: () => void;
 };
 
-const whatsappLink = "https://wa.me/2347062874510";
+const emailAddress = "info@oaklandcri.com";
+const enquiryMessage =
+  "Hello Oakland CRI,%0A%0AName:%0ALocation:%0AProject type:%0AService needed:%0A%0A";
+const whatsappLink = `https://wa.me/2347062874510?text=${enquiryMessage}`;
+const emailLink = `mailto:${emailAddress}?subject=Project%20Enquiry&body=${enquiryMessage}`;
+const brandName = "Oakland CRI";
 
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Projects", href: "#projects" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: whatsappLink },
+  { label: "Contact", href: "#contact" },
 ];
 
 const services = [
   {
     title: "Real Estate Development",
     description:
-      "Residential and commercial property development designed around quality, functionality, and long-term value.",
+      "Residential, commercial, industrial, and mixed-use property development.",
     icon: Building2,
   },
   {
-    title: "Land Sales & Acquisition",
+    title: "Land & Property Acquisition",
     description:
-      "Support with verified land opportunities, documentation guidance, and site inspection coordination.",
+      "Guidance for land, buildings, estates, offices, and warehouses.",
     icon: Landmark,
   },
   {
-    title: "Construction Services",
+    title: "Construction & Civil Works",
     description:
-      "Building construction, renovation, finishing, and project supervision for private and commercial clients.",
+      "Construction, civil works, structural works, roads, drainage, and renovation.",
     icon: Hammer,
   },
   {
-    title: "Property Investment",
+    title: "Investment & Joint Ventures",
     description:
-      "Real estate investment advisory and property portfolio support for individuals, families, and businesses.",
+      "Property investment, development schemes, partnerships, and joint ventures.",
     icon: TrendingUp,
   },
   {
-    title: "Property Management",
+    title: "Project & Facility Management",
     description:
-      "Maintenance coordination, tenant support, and practical oversight for rental and investment properties.",
+      "Project oversight, facility development, maintenance, and estate management.",
     icon: Home,
   },
   {
     title: "Building Materials Supply",
     description:
-      "Procurement and supply support for reliable construction materials and project execution needs.",
+      "Reliable supply of core building materials, equipment, and finishing goods.",
     icon: Warehouse,
+  },
+];
+
+const pillars = [
+  {
+    title: "Verified Property Access",
+    description:
+      "Clear guidance for land, buildings, estates, and commercial assets.",
+    icon: FileCheck2,
+  },
+  {
+    title: "Construction Delivery",
+    description:
+      "Accountable delivery across construction, civil works, and maintenance.",
+    icon: Ruler,
+  },
+  {
+    title: "Investment Advisory",
+    description:
+      "Property investment guidance focused on durable long-term value.",
+    icon: TrendingUp,
+  },
+  {
+    title: "Materials Supply",
+    description:
+      "Sourcing and supply for materials, equipment, hardware, and finishes.",
+    icon: Truck,
+  },
+];
+
+const companyObjects = [
+  {
+    label: "Build",
+    title: "Construction",
+    summary:
+      "Civil works, structures, roads, drainage, renovation, and maintenance.",
+  },
+  {
+    label: "Develop",
+    title: "Real estate",
+    summary:
+      "Development, acquisition, sale, leasing, and estate management.",
+  },
+  {
+    label: "Supply",
+    title: "Materials",
+    summary:
+      "Building materials, equipment, hardware, fittings, and finishes.",
+  },
+  {
+    label: "Partner",
+    title: "Partnerships",
+    summary:
+      "Contracts, ventures, approvals, consultants, and professional teams.",
+  },
+];
+
+const processSteps = [
+  {
+    step: "01",
+    title: "Brief",
+    description: "Clarify the goal, location, scope, and service need.",
+  },
+  {
+    step: "02",
+    title: "Verify",
+    description: "Review the property, site, documents, or supply requirement.",
+  },
+  {
+    step: "03",
+    title: "Plan",
+    description: "Set the practical path for acquisition, build, investment, or supply.",
+  },
+  {
+    step: "04",
+    title: "Execute",
+    description: "Coordinate people, materials, approvals, and delivery steps.",
   },
 ];
 
 const projects = [
   {
-    title: "Residential Developments",
-    category: "Housing & Estates",
+    title: "Residential Construction",
+    category: "Build & Finish",
     description:
-      "Modern homes and estate concepts built for comfort, durability, and long-term asset value.",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "Land Banking Opportunities",
-    category: "Land & Investment",
-    description:
-      "Strategic land opportunities for buyers and investors seeking future growth potential.",
-    image:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "Construction Projects",
-    category: "Build & Supervision",
-    description:
-      "Construction support from planning to execution, with attention to quality and accountability.",
+      "Homes and estate concepts built for quality and long-term value.",
     image:
       "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Property Investment",
+    category: "Investment Advisory",
+    description:
+      "Property opportunities shaped around location, demand, and asset value.",
+    image:
+      "https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Materials Supply",
+    category: "Procurement",
+    description:
+      "Supply coordination for materials, project inputs, and site needs.",
+    image:
+      "https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?auto=format&fit=crop&w=1200&q=80",
+  },
+];
+
+const dashboardTabs = [
+  {
+    label: "Construction",
+    title: "Construction delivery dashboard",
+    status: "Active planning",
+    image:
+      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80",
+    metrics: [
+      ["Scope", "Residential and commercial builds"],
+      ["Focus", "Quality control and site supervision"],
+      ["Next step", "Project brief and cost review"],
+    ],
+  },
+  {
+    label: "Investment",
+    title: "Property investment pipeline",
+    status: "Investor ready",
+    image:
+      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80",
+    metrics: [
+      ["Scope", "Land, estates, and property growth"],
+      ["Focus", "Asset value and market fit"],
+      ["Next step", "Investment objective review"],
+    ],
+  },
+  {
+    label: "Supply",
+    title: "Materials supply coordination",
+    status: "Procurement support",
+    image:
+      "https://images.unsplash.com/photo-1590725140246-20acdee442be?auto=format&fit=crop&w=1200&q=80",
+    metrics: [
+      ["Scope", "Building materials and site inputs"],
+      ["Focus", "Reliable sourcing and delivery"],
+      ["Next step", "Material schedule and quotation"],
+    ],
   },
 ];
 
@@ -128,19 +253,21 @@ const values = [
 
 const faqs = [
   {
-    question: "Does OaklandCRI sell verified land?",
-    answer:
-      "Yes. OaklandCRI can support clients with verified land opportunities, documentation guidance, and site inspection coordination.",
+    question: `Does ${brandName} sell verified land?`,
+    answer: "Yes. We support land opportunities, documentation, and inspections.",
   },
   {
-    question: "Can OaklandCRI help with construction?",
+    question: `Can ${brandName} help with construction?`,
     answer:
-      "Yes. The company supports building construction, renovation, finishing, and project supervision across different project types.",
+      "Yes. We handle construction, civil works, renovation, and supervision.",
   },
   {
     question: "Do you offer property investment advice?",
-    answer:
-      "Yes. OaklandCRI provides property investment support for clients who want to make informed real estate decisions.",
+    answer: "Yes. We help clients make informed property investment decisions.",
+  },
+  {
+    question: "Can you supply building materials?",
+    answer: "Yes. We support procurement and supply based on project needs.",
   },
   {
     question: "Can I schedule a site inspection?",
@@ -163,7 +290,7 @@ function ThemeToggle({ isDarkMode, setIsDarkMode }: ThemeToggleProps) {
   );
 }
 
-function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
+function Navbar({ isDarkMode, setIsDarkMode, onOpenFaq }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -176,7 +303,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
 
           <div>
             <p className="text-lg font-black tracking-tight text-[var(--text)]">
-              OaklandCRI
+              {brandName}
             </p>
             <p className="text-xs font-medium uppercase tracking-[0.24em] text-[var(--accent-text)]">
               Real Estate
@@ -200,13 +327,19 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
               {link.label}
             </a>
           ))}
+
+          <button
+            type="button"
+            onClick={onOpenFaq}
+            className="text-sm font-semibold text-[var(--muted)] transition hover:text-[var(--accent-text)]"
+          >
+            FAQ
+          </button>
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
           <a
-            href={whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contact"
             className="rounded-full bg-[var(--button-bg)] px-5 py-3 text-sm font-bold text-[var(--button-text)] shadow-lg shadow-[var(--button-shadow)] transition hover:bg-[var(--button-bg-hover)]"
           >
             Contact Us
@@ -220,9 +353,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
 
         <div className="flex items-center gap-2 lg:hidden">
           <a
-            href={whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contact"
             className="hidden rounded-full bg-[var(--button-bg)] px-4 py-2 text-xs font-bold text-[var(--button-text)] sm:inline-flex"
           >
             Contact
@@ -264,10 +395,19 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
               </a>
             ))}
 
+            <button
+              type="button"
+              onClick={() => {
+                setIsOpen(false);
+                onOpenFaq();
+              }}
+              className="text-left text-sm font-semibold text-[var(--muted)]"
+            >
+              FAQ
+            </button>
+
             <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#contact"
               onClick={() => setIsOpen(false)}
               className="rounded-full bg-[var(--button-bg)] px-5 py-3 text-center text-sm font-bold text-[var(--button-text)]"
             >
@@ -282,7 +422,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
 
 function SectionBadge({ children }: SectionBadgeProps) {
   return (
-    <span className="inline-flex rounded-full border border-[var(--accent-soft-strong)] bg-[var(--accent-soft)] px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-[var(--accent-text)]">
+    <span className="inline-flex max-w-full whitespace-normal break-words rounded-full border border-[var(--accent-soft-strong)] bg-[var(--accent-soft)] px-4 py-2 text-center text-xs font-black uppercase leading-5 tracking-[0.12em] text-[var(--accent-text)] sm:tracking-[0.22em]">
       {children}
     </span>
   );
@@ -292,90 +432,131 @@ function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-[var(--bg)] pt-32 lg:pt-40"
+      className="relative min-h-[82svh] overflow-hidden bg-gray-950 pt-24 text-white sm:pt-28 lg:min-h-[92vh] lg:pt-36"
     >
-      <div className="absolute -left-32 top-16 h-96 w-96 rounded-full bg-[var(--hero-glow-one)] blur-3xl" />
-      <div className="absolute -right-32 top-72 h-96 w-96 rounded-full bg-[var(--hero-glow-two)] blur-3xl" />
+      <div
+        className="absolute inset-0 scale-110 bg-cover bg-center bg-no-repeat lg:bg-fixed"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1800&q=80')",
+        }}
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-950/92 via-gray-950/72 to-gray-950/20" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[var(--bg)] to-transparent" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:pb-28">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-5 pb-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:px-8 lg:pb-24">
         <div>
-          <SectionBadge>Real Estate • Construction • Investment</SectionBadge>
+          <SectionBadge>Real Estate • Construction • Investment • Supply</SectionBadge>
 
-          <h1 className="mt-7 max-w-4xl text-5xl font-black leading-[1.03] tracking-tight text-[var(--text)] md:text-6xl lg:text-7xl">
-            Building lasting value through real estate and construction.
+          <h1 className="mt-6 max-w-4xl text-[clamp(2.15rem,10vw,3.25rem)] font-black leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:mt-7 lg:text-7xl">
+            Oakland CRI builds property value from land to handover.
           </h1>
 
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--muted)]">
-            OaklandCRI provides real estate, construction, property investment,
-            and development solutions for clients who want quality, trust, and
-            long-term value.
+          <p className="mt-5 max-w-2xl text-[clamp(0.95rem,3.8vw,1.05rem)] leading-7 text-gray-200 sm:text-lg sm:leading-8 lg:mt-6">
+            Construction, real estate, investment, and materials supply with a
+            clear, dependable execution partner.
           </p>
 
-          <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-9 lg:gap-4">
             <a
               href="#services"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--button-bg)] px-7 py-4 text-sm font-black text-[var(--button-text)] shadow-xl shadow-[var(--button-shadow)] transition hover:bg-[var(--button-bg-hover)]"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[var(--button-bg)] px-7 py-4 text-sm font-black text-[var(--button-text)] shadow-xl shadow-[var(--button-shadow)] transition hover:bg-[var(--button-bg-hover)]"
             >
-              Explore Services <ArrowRight size={18} />
+              Explore Capabilities <ArrowRight size={18} />
             </a>
 
             <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-7 py-4 text-sm font-black text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent-text)]"
+              href="#contact"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/25 bg-white/10 px-7 py-4 text-sm font-black text-white backdrop-blur transition hover:border-[var(--accent)] hover:bg-white/15"
             >
               Contact Us
             </a>
           </div>
 
-          <div className="mt-10 grid max-w-xl grid-cols-3 gap-4">
+          <div className="mt-8 hidden max-w-xl grid-cols-1 gap-3 sm:grid sm:grid-cols-3 lg:mt-10 lg:gap-4">
             {[
               ["Real Estate", "Solutions"],
-              ["Construction", "Support"],
-              ["Investment", "Advisory"],
+              ["Construction", "Delivery"],
+              ["Supply", "Materials"],
             ].map(([top, bottom]) => (
               <div
                 key={top}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm"
+                className="min-w-0 rounded-lg border border-white/15 bg-white/10 p-4 shadow-sm backdrop-blur"
               >
-                <p className="text-sm font-black text-[var(--text)]">{top}</p>
-                <p className="mt-1 text-xs font-semibold text-[var(--muted)]">
+                <p className="break-words text-[13px] font-black text-white sm:text-sm">
+                  {top}
+                </p>
+                <p className="mt-1 text-xs font-semibold text-gray-300">
                   {bottom}
                 </p>
               </div>
             ))}
           </div>
+
+          <div className="mt-7 overflow-hidden rounded-xl border border-white/15 bg-white/10 p-3 shadow-2xl shadow-black/30 backdrop-blur lg:hidden">
+            <div className="relative h-48 overflow-hidden rounded-lg sm:h-80">
+              <Image
+                src="https://images.unsplash.com/photo-1541976590-713941681591?auto=format&fit=crop&w=1000&q=80"
+                alt="Modern building under construction"
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/85 via-gray-950/10 to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 rounded-lg bg-white/95 p-4 text-gray-950">
+                <p className="break-words text-sm font-black leading-5">
+                  Build. Property. Investment. Supply.
+                </p>
+                <p className="mt-1 text-xs leading-5 text-gray-600">
+                  One coordinated path from enquiry to project decision.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="relative">
-          <div className="relative overflow-hidden rounded-[2rem] border-8 border-[var(--surface)] shadow-2xl shadow-[var(--image-shadow)]">
-            <Image
-              src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=80"
-              alt="Modern residential building"
-              width={1400}
-              height={933}
-              sizes="(min-width: 1024px) 48vw, 100vw"
-              className="h-[520px] w-full object-cover"
-              fetchPriority="high"
-            />
+        <div className="relative hidden lg:block">
+          <div className="relative overflow-hidden rounded-xl border border-white/15 bg-white/10 p-4 shadow-2xl shadow-black/35 backdrop-blur">
+            <div className="relative h-[470px] overflow-hidden rounded-lg">
+              <Image
+                src="https://images.unsplash.com/photo-1541976590-713941681591?auto=format&fit=crop&w=1200&q=80"
+                alt="Modern building under construction"
+                fill
+                sizes="42vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/82 via-gray-950/18 to-transparent" />
+            </div>
 
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-gray-950/10 to-transparent" />
+            <div className="absolute bottom-8 left-8 right-8 rounded-xl border border-white/15 bg-white/95 p-5 text-gray-950 shadow-2xl shadow-black/25">
+              <div className="flex items-center justify-between gap-5">
+                <div className="flex items-start gap-4">
+                  <div className="rounded-lg bg-[var(--accent)] p-3 text-white">
+                    <ShieldCheck size={24} />
+                  </div>
 
-            <div className="absolute bottom-6 left-6 right-6 rounded-3xl bg-[var(--floating-panel)] p-5 shadow-xl backdrop-blur">
-              <div className="flex items-start gap-4">
-                <div className="rounded-2xl bg-[var(--accent-soft)] p-3 text-[var(--accent-text)]">
-                  <ShieldCheck size={24} />
+                  <div>
+                    <p className="font-black">Construction, property, and supply</p>
+                    <p className="mt-1 text-sm leading-6 text-gray-600">
+                      From land and planning to site delivery and supply.
+                    </p>
+                  </div>
                 </div>
 
-                <div>
-                  <p className="font-black text-[var(--floating-text)]">
-                    Professional property support
-                  </p>
-                  <p className="mt-1 text-sm leading-6 text-[var(--floating-muted)]">
-                    From land acquisition to construction and investment
-                    advisory.
-                  </p>
+                <div className="grid shrink-0 grid-cols-2 gap-3 text-center">
+                  <div className="rounded-lg bg-orange-50 px-4 py-3">
+                    <p className="text-2xl font-black text-orange-600">4</p>
+                    <p className="text-[11px] font-black uppercase tracking-[0.14em] text-gray-500">
+                      Pillars
+                    </p>
+                  </div>
+                  <div className="rounded-lg bg-gray-100 px-4 py-3">
+                    <p className="text-2xl font-black text-gray-950">1</p>
+                    <p className="text-[11px] font-black uppercase tracking-[0.14em] text-gray-500">
+                      Partner
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -388,49 +569,52 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" className="bg-[var(--soft-bg)] py-20 lg:py-28">
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+    <section id="about" className="bg-[var(--soft-bg)] py-14 lg:py-28">
+      <div className="mx-auto grid max-w-7xl gap-8 px-5 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:px-8">
         <div>
-          <SectionBadge>About OaklandCRI</SectionBadge>
+          <SectionBadge>About {brandName}</SectionBadge>
 
-          <h2 className="mt-6 text-4xl font-black tracking-tight text-[var(--text)] md:text-5xl">
+          <h2 className="mt-5 text-3xl font-black tracking-tight text-[var(--text)] md:text-5xl">
             A practical real estate partner for building, buying, and investing
             well.
           </h2>
+
+          <div className="mt-8 hidden overflow-hidden rounded-xl border border-[var(--border)] shadow-lg shadow-[var(--card-shadow)] md:block">
+            <Image
+              src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1000&q=80"
+              alt="Construction worker reviewing site progress"
+              width={1000}
+              height={667}
+              sizes="(min-width: 1024px) 38vw, 100vw"
+              className="h-80 w-full object-cover"
+            />
+          </div>
         </div>
 
-        <div className="space-y-6 text-lg leading-8 text-[var(--muted)]">
-          <p>
-            OaklandCRI is a real estate and construction company focused on
-            helping clients access quality property solutions, from land
-            acquisition and development to construction, investment support, and
-            property advisory.
+        <div className="space-y-5 text-base leading-7 text-[var(--muted)] lg:text-lg lg:leading-8">
+          <p className="text-lg leading-8">
+            {brandName} helps clients build, buy, invest, and supply with
+            greater clarity and confidence.
           </p>
 
-          <p>
-            The company is built around a simple promise: to help clients make
-            property decisions with greater clarity, confidence, and long-term
-            value in mind.
-          </p>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
+          <div className="grid gap-3 sm:grid-cols-2 lg:gap-4">
+            <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm lg:p-6">
               <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--accent-text)]">
                 Mission
               </p>
               <p className="mt-3 text-base leading-7 text-[var(--muted)]">
-                To deliver reliable real estate and construction solutions that
-                create lasting value for clients.
+                Reliable construction, real estate, supply, and investment
+                solutions.
               </p>
             </div>
 
-            <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
+            <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm lg:p-6">
               <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--accent-text)]">
                 Vision
               </p>
               <p className="mt-3 text-base leading-7 text-[var(--muted)]">
-                To become a trusted name in property development, investment,
-                and construction support.
+                A trusted name in property development, civil works, and
+                materials supply.
               </p>
             </div>
           </div>
@@ -440,42 +624,171 @@ function About() {
   );
 }
 
+function Pillars() {
+  return (
+    <section className="bg-[var(--bg)] py-14 lg:py-28">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div className="max-w-3xl">
+            <SectionBadge>Four Pillars</SectionBadge>
+
+            <h2 className="mt-5 text-3xl font-black tracking-tight text-[var(--text)] md:text-5xl">
+              The operating model behind every Oakland CRI engagement.
+            </h2>
+          </div>
+
+          <p className="max-w-md text-base leading-7 text-[var(--muted)]">
+            Property, construction, supply, and investment. Clear and
+            accountable.
+          </p>
+        </div>
+
+        <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-2 lg:mt-12 lg:grid-cols-4 lg:gap-5">
+          {pillars.map((pillar) => {
+            const Icon = pillar.icon;
+
+            return (
+              <article
+                key={pillar.title}
+                className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--card-shadow)] lg:p-6"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent-text)] lg:h-12 lg:w-12">
+                  <Icon size={22} />
+                </div>
+
+                <h3 className="mt-4 text-base font-black leading-6 text-[var(--text)] lg:mt-5 lg:text-xl">
+                  {pillar.title}
+                </h3>
+
+                <p className="mt-3 hidden leading-7 text-[var(--muted)] sm:block">
+                  {pillar.description}
+                </p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CompanyObjects() {
+  return (
+    <section className="hidden bg-[var(--soft-bg)] py-20 md:block lg:py-28">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <SectionBadge>Company Objects</SectionBadge>
+
+            <h2 className="mt-6 text-4xl font-black tracking-tight text-[var(--text)] md:text-5xl">
+              Four areas. One coordinated company.
+            </h2>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {companyObjects.map((item, index) => (
+              <article
+                key={item.title}
+                className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <span className="rounded-full bg-[var(--accent-soft)] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[var(--accent-text)]">
+                    {item.label}
+                  </span>
+                  <span className="text-sm font-black text-[var(--muted)]">
+                    0{index + 1}
+                  </span>
+                </div>
+
+                <h3 className="mt-5 text-xl font-black text-[var(--text)]">
+                  {item.title}
+                </h3>
+
+                <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+                  {item.summary}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WorkProcess() {
+  return (
+    <section className="bg-[var(--bg)] py-14 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+          <div>
+            <SectionBadge>How We Work</SectionBadge>
+
+            <h2 className="mt-5 text-3xl font-black tracking-tight text-[var(--text)] sm:text-4xl md:text-5xl">
+              A clearer path from enquiry to execution.
+            </h2>
+          </div>
+
+          <p className="text-base leading-7 text-[var(--muted)] sm:text-lg sm:leading-8">
+            A simple sequence for property, construction, investment, and
+            supply work.
+          </p>
+        </div>
+
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4 lg:gap-4">
+          {processSteps.map((item) => (
+            <article
+              key={item.step}
+              className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm sm:p-6"
+            >
+              <p className="text-sm font-black text-[var(--accent-text)]">
+                {item.step}
+              </p>
+              <h3 className="mt-3 text-lg font-black text-[var(--text)] sm:mt-4 sm:text-xl">
+                {item.title}
+              </h3>
+              <p className="mt-2 hidden text-sm leading-6 text-[var(--muted)] sm:block sm:text-base sm:leading-7">
+                {item.description}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Services() {
   return (
-    <section id="services" className="bg-[var(--bg)] py-20 lg:py-28">
+    <section id="services" className="bg-[var(--bg)] py-14 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <SectionBadge>Our Services</SectionBadge>
 
-          <h2 className="mt-6 text-4xl font-black tracking-tight text-[var(--text)] md:text-5xl">
-            End-to-end support across real estate, construction, and property
+          <h2 className="mt-5 text-3xl font-black tracking-tight text-[var(--text)] md:text-5xl">
+            End-to-end support across construction, real estate, supply, and
             investment.
           </h2>
-
-          <p className="mt-5 text-lg leading-8 text-[var(--muted)]">
-            Clear, practical services designed to support clients at different
-            stages of their property journey.
-          </p>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-3 md:grid-cols-2 lg:mt-14 lg:grid-cols-3 lg:gap-6">
           {services.map((service) => {
             const Icon = service.icon;
 
             return (
               <div
                 key={service.title}
-                className="group rounded-[1.75rem] border border-[var(--border)] bg-[var(--surface)] p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--card-shadow)]"
+                className="group flex items-center gap-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--card-shadow)] lg:block lg:p-7"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent-soft)] text-[var(--accent-text)] transition group-hover:bg-[var(--accent)] group-hover:text-[var(--accent-contrast)]">
-                  <Icon size={26} />
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent-text)] transition group-hover:bg-[var(--accent)] group-hover:text-[var(--accent-contrast)] lg:h-14 lg:w-14">
+                  <Icon size={22} />
                 </div>
 
-                <h3 className="mt-6 text-xl font-black text-[var(--text)]">
+                <h3 className="text-base font-black text-[var(--text)] lg:mt-6 lg:text-xl">
                   {service.title}
                 </h3>
 
-                <p className="mt-3 leading-7 text-[var(--muted)]">
+                <p className="mt-3 hidden leading-7 text-[var(--muted)] lg:block">
                   {service.description}
                 </p>
               </div>
@@ -490,29 +803,46 @@ function Services() {
 function WhyChooseUs() {
   return (
     <section
-      className="py-20 text-white lg:py-28"
+      className="py-14 text-white lg:py-28"
       style={{ background: "var(--dark-section)" }}
     >
       <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[1fr_1fr] lg:px-8">
         <div>
           <SectionBadge>Why Choose Us</SectionBadge>
 
-          <h2 className="mt-6 text-4xl font-black tracking-tight text-white md:text-5xl">
+          <h2 className="mt-5 text-3xl font-black tracking-tight text-white md:text-5xl">
             Built on trust, clarity, and quality execution.
           </h2>
 
           <p className="mt-6 text-lg leading-8 text-[var(--on-dark-muted)]">
-            Real estate decisions are significant. OaklandCRI helps clients move
-            with better information, practical guidance, and dependable project
-            support.
+            Better information. Practical guidance. Dependable delivery.
           </p>
+
+          <div className="mt-6 rounded-lg border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5 backdrop-blur lg:mt-8">
+            <div className="flex items-start gap-4">
+              <div className="rounded-lg bg-[var(--accent)] p-3 text-white">
+                <ShieldCheck size={24} />
+              </div>
+              <div>
+                <p className="text-lg font-black text-white">
+                  Trusted by the federal government
+                </p>
+                <p className="mt-2 leading-7 text-[var(--on-dark-muted)]">
+                  Professional standards, disciplined process, accountable
+                  delivery.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          {values.map((value) => (
+        <div className="grid gap-3 sm:grid-cols-2 lg:gap-4">
+          {values.map((value, index) => (
             <div
               key={value}
-              className="flex items-start gap-3 rounded-3xl border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5 backdrop-blur"
+              className={`items-start gap-3 rounded-lg border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-4 backdrop-blur lg:p-5 ${
+                index > 3 ? "hidden sm:flex" : "flex"
+              }`}
             >
               <CheckCircle2
                 className="mt-1 shrink-0 text-[var(--accent-text)]"
@@ -527,33 +857,124 @@ function WhyChooseUs() {
   );
 }
 
+function ProjectDashboard() {
+  const [activeTab, setActiveTab] = useState(dashboardTabs[0]);
+
+  return (
+    <div className="mt-10 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-3 shadow-xl shadow-[var(--card-shadow)] sm:p-4 lg:mt-16 lg:p-6">
+      <div className="flex flex-col gap-4 border-b border-[var(--border)] pb-4 lg:flex-row lg:items-center lg:justify-between lg:pb-5">
+        <div>
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent-text)] lg:h-10 lg:w-10">
+              <Layers3 size={20} />
+            </span>
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-[var(--accent-text)] lg:text-sm lg:font-black lg:tracking-[0.18em]">
+              Project Dashboard
+            </p>
+          </div>
+
+          <h3 className="mt-3 text-xl font-extrabold leading-7 text-[var(--text)] lg:text-2xl lg:font-black">
+            Track the work by capability.
+          </h3>
+        </div>
+
+        <div className="grid grid-cols-3 gap-1 rounded-lg border border-[var(--border)] bg-[var(--soft-bg)] p-1 sm:gap-2">
+          {dashboardTabs.map((tab) => {
+            const isActive = activeTab.label === tab.label;
+
+            return (
+              <button
+                key={tab.label}
+                type="button"
+                onClick={() => setActiveTab(tab)}
+                className={`rounded-md px-2 py-2 text-[11px] font-bold transition sm:px-3 sm:text-xs lg:px-4 lg:py-3 lg:text-sm lg:font-black ${
+                  isActive
+                    ? "bg-[var(--button-bg)] text-[var(--button-text)] shadow-sm"
+                    : "text-[var(--muted)] hover:text-[var(--accent-text)]"
+                }`}
+                aria-pressed={isActive}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="grid gap-4 pt-4 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch lg:gap-6 lg:pt-6">
+        <div className="relative min-h-52 overflow-hidden rounded-lg sm:min-h-64 lg:min-h-80">
+          <Image
+            src={activeTab.image}
+            alt={activeTab.title}
+            fill
+            sizes="(min-width: 1024px) 42vw, 100vw"
+            className="object-cover transition duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-gray-950/10 to-transparent" />
+          <div className="absolute bottom-5 left-5 right-5">
+            <span className="rounded-full bg-white px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-gray-950 lg:px-4 lg:text-xs lg:font-black lg:tracking-[0.16em]">
+              {activeTab.status}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-col justify-between gap-4 rounded-lg border border-[var(--border)] bg-[var(--soft-bg)] p-4 lg:gap-6 lg:p-6">
+          <div>
+            <h4 className="text-2xl font-extrabold leading-8 tracking-tight text-[var(--text)] lg:text-3xl lg:font-black">
+              {activeTab.title}
+            </h4>
+
+            <p className="mt-3 text-sm leading-6 text-[var(--muted)] lg:mt-4 lg:text-base lg:leading-7">
+              A simple view of scope, focus, and next steps.
+            </p>
+          </div>
+
+          <div className="grid gap-2 lg:gap-3">
+            {activeTab.metrics.map(([label, value]) => (
+              <div
+                key={label}
+                className="grid gap-1 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-3 sm:grid-cols-[120px_1fr] lg:gap-2 lg:p-4 lg:sm:grid-cols-[140px_1fr]"
+              >
+                <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--accent-text)] lg:text-xs lg:font-black lg:tracking-[0.16em]">
+                  {label}
+                </p>
+                <p className="text-sm font-medium leading-6 text-[var(--text)] lg:text-base lg:font-semibold">
+                  {value}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Projects() {
   return (
-    <section id="projects" className="bg-[var(--bg)] py-20 lg:py-28">
+    <section id="projects" className="bg-[var(--bg)] py-14 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-3xl">
             <SectionBadge>Project Areas</SectionBadge>
 
-            <h2 className="mt-6 text-4xl font-black tracking-tight text-[var(--text)] md:text-5xl">
-              Property solutions OaklandCRI is positioned to deliver.
+            <h2 className="mt-5 text-3xl font-black tracking-tight text-[var(--text)] md:text-5xl">
+              Property solutions Oakland CRI is positioned to deliver.
             </h2>
           </div>
 
           <p className="max-w-md text-base leading-7 text-[var(--muted)]">
-            Our project portfolio is currently being updated. These visuals
-            represent the types of real estate and construction solutions we
-            support.
+            Construction, investment, and supply in one view.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-7 lg:grid-cols-3">
+        <div className="mt-8 grid gap-4 lg:mt-14 lg:grid-cols-3 lg:gap-7">
           {projects.map((project) => (
             <article
               key={project.title}
-              className="overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] shadow-sm transition hover:shadow-xl hover:shadow-[var(--card-shadow)]"
+              className="overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface)] shadow-sm transition hover:shadow-xl hover:shadow-[var(--card-shadow)]"
             >
-              <div className="relative h-72 overflow-hidden">
+              <div className="relative h-52 overflow-hidden lg:h-72">
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -568,12 +989,12 @@ function Projects() {
                 </div>
               </div>
 
-              <div className="p-7">
-                <h3 className="text-2xl font-black text-[var(--text)]">
+              <div className="p-5 lg:p-7">
+                <h3 className="text-xl font-black text-[var(--text)] lg:text-2xl">
                   {project.title}
                 </h3>
 
-                <p className="mt-3 leading-7 text-[var(--muted)]">
+                <p className="mt-3 hidden leading-7 text-[var(--muted)] sm:block">
                   {project.description}
                 </p>
               </div>
@@ -581,54 +1002,116 @@ function Projects() {
           ))}
         </div>
 
-        <p className="mt-8 text-center text-sm text-[var(--muted)]">
-          Visuals shown are representative concept images and may not depict
-          completed OaklandCRI projects.
-        </p>
+        <ProjectDashboard />
       </div>
     </section>
   );
 }
 
-function Testimonials() {
+function ReadyStart() {
   return (
-    <section className="bg-[var(--soft-bg)] py-20 lg:py-24">
-      <div className="mx-auto max-w-5xl px-5 text-center lg:px-8">
-        <SectionBadge>Client Stories</SectionBadge>
+    <section className="bg-[var(--soft-bg)] py-14 lg:py-24">
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-8">
+        <div>
+          <SectionBadge>Ready To Start</SectionBadge>
 
-        <h2 className="mt-6 text-4xl font-black tracking-tight text-[var(--text)] md:text-5xl">
-          Testimonials coming soon.
-        </h2>
-
-        <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[var(--muted)]">
-          OaklandCRI is currently building a strong record of client success
-          stories. Verified testimonials will be shared here as the company grows
-          its project portfolio.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-function FAQ() {
-  return (
-    <section id="faq" className="bg-[var(--bg)] py-20 lg:py-28">
-      <div className="mx-auto max-w-4xl px-5 lg:px-8">
-        <div className="text-center">
-          <SectionBadge>FAQ</SectionBadge>
-
-          <h2 className="mt-6 text-4xl font-black tracking-tight text-[var(--text)] md:text-5xl">
-            Common questions.
+          <h2 className="mt-5 text-3xl font-black tracking-tight text-[var(--text)] md:text-5xl">
+            Ready to start your project with Oakland CRI?
           </h2>
+
+          <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--muted)] lg:text-lg lg:leading-8">
+            Share the location, service need, and project stage. We will guide
+            the next step.
+          </p>
+
+          <a
+            href="#contact"
+            className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[var(--button-bg)] px-7 py-4 text-sm font-black text-[var(--button-text)] shadow-xl shadow-[var(--button-shadow)] transition hover:bg-[var(--button-bg-hover)]"
+          >
+            Start Your Project <ArrowRight size={18} />
+          </a>
         </div>
 
-        <div className="mt-12 space-y-4">
+        <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3 shadow-2xl shadow-[var(--card-shadow)]">
+          <div className="relative h-72 overflow-hidden rounded-xl sm:h-[430px]">
+            <Image
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80"
+              alt="Modern residential property exterior"
+              fill
+              sizes="(min-width: 1024px) 52vw, 100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-gray-950/10 to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-white/15 bg-white/95 p-4 text-gray-950 shadow-xl backdrop-blur sm:bottom-6 sm:left-6 sm:right-6 sm:p-5">
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--accent-text)]">
+                Next Step
+              </p>
+              <p className="mt-2 text-xl font-black leading-7 sm:text-2xl">
+                Tell us what you want to build, buy, invest in, or supply.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQModal({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  if (!isOpen) {
+    return null;
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-[70] overflow-y-auto bg-gray-950/70 px-4 py-6 backdrop-blur-sm sm:py-10"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="faq-title"
+    >
+      <button
+        type="button"
+        className="fixed inset-0 cursor-default"
+        aria-label="Close FAQ"
+        onClick={onClose}
+      />
+
+      <div className="relative mx-auto max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-2xl shadow-black/30 sm:p-7">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <SectionBadge>FAQ</SectionBadge>
+
+            <h2
+              id="faq-title"
+              className="mt-4 text-3xl font-black tracking-tight text-[var(--text)] sm:text-4xl"
+            >
+              Common questions.
+            </h2>
+          </div>
+
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--soft-bg)] text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent-text)]"
+            aria-label="Close FAQ"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        <div className="mt-8 space-y-3">
           {faqs.map((faq) => (
             <details
               key={faq.question}
-              className="group rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm open:shadow-lg open:shadow-[var(--card-shadow)]"
+              className="group rounded-lg border border-[var(--border)] bg-[var(--soft-bg)] p-5 shadow-sm"
             >
-              <summary className="cursor-pointer list-none text-lg font-black text-[var(--text)] marker:hidden">
+              <summary className="cursor-pointer list-none text-base font-black text-[var(--text)] marker:hidden sm:text-lg">
                 <span className="flex items-center justify-between gap-4">
                   <span>{faq.question}</span>
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-text)] transition group-open:rotate-45">
@@ -637,12 +1120,14 @@ function FAQ() {
                 </span>
               </summary>
 
-              <p className="mt-4 leading-7 text-[var(--muted)]">{faq.answer}</p>
+              <p className="mt-4 text-sm leading-6 text-[var(--muted)] sm:text-base">
+                {faq.answer}
+              </p>
             </details>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -650,73 +1135,97 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="py-20 text-white lg:py-28"
+      className="py-14 text-white lg:py-28"
       style={{ background: "var(--dark-section)" }}
     >
       <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
         <div>
           <SectionBadge>Contact Us</SectionBadge>
 
-          <h2 className="mt-6 text-4xl font-black tracking-tight text-white md:text-5xl">
-            Ready to discuss your property needs?
+          <h2 className="mt-5 text-3xl font-black tracking-tight text-white md:text-5xl">
+            Ready to start your project?
           </h2>
 
           <p className="mt-6 text-lg leading-8 text-[var(--on-dark-muted)]">
-            Send us a message on WhatsApp and the OaklandCRI team will follow up
-            on your real estate, construction, or investment enquiry.
+            Reach us by email or WhatsApp.
           </p>
 
-          <div className="mt-10 space-y-4">
+          <div className="mt-8 space-y-3 lg:mt-10 lg:space-y-4">
             <a
               href="tel:+2347062874510"
-              className="flex items-center gap-4 rounded-3xl border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5 transition hover:bg-[var(--on-dark-panel-hover)]"
+              className="flex items-center gap-4 rounded-lg border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5 transition hover:bg-[var(--on-dark-panel-hover)]"
             >
               <Phone className="text-[var(--accent-text)]" size={24} />
               <span className="font-semibold">0706 287 4510</span>
             </a>
 
             <a
-              href="mailto:hello@oaklandcri.com"
-              className="flex items-center gap-4 rounded-3xl border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5 transition hover:bg-[var(--on-dark-panel-hover)]"
+              href={emailLink}
+              className="flex items-center gap-4 rounded-lg border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5 transition hover:bg-[var(--on-dark-panel-hover)]"
             >
               <Mail className="text-[var(--accent-text)]" size={24} />
-              <span className="font-semibold">hello@oaklandcri.com</span>
+              <span className="font-semibold">{emailAddress}</span>
             </a>
 
-            <div className="flex items-center gap-4 rounded-3xl border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5">
+            <div className="flex items-center gap-4 rounded-lg border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5">
               <MapPin className="text-[var(--accent-text)]" size={24} />
               <span className="font-semibold">Nigeria</span>
             </div>
           </div>
         </div>
 
-        <div className="rounded-[2rem] border border-[var(--contact-card-border)] bg-[var(--contact-card)] p-6 text-[var(--floating-text)] shadow-2xl shadow-black/20 lg:p-8">
-          <div className="rounded-3xl bg-[var(--accent-soft)] p-6">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--accent)] text-[var(--accent-contrast)]">
-              <MessageCircle size={32} />
-            </div>
-
-            <h3 className="mt-6 text-3xl font-black text-[var(--floating-text)]">
-              Chat with OaklandCRI on WhatsApp
+        <div className="rounded-2xl border border-[var(--contact-card-border)] bg-[var(--contact-card)] p-5 text-[var(--floating-text)] shadow-2xl shadow-black/20 lg:rounded-[2rem] lg:p-8">
+          <div className="rounded-lg bg-[var(--accent-soft)] p-5 lg:p-6">
+            <h3 className="text-2xl font-black text-[var(--floating-text)] lg:text-3xl">
+              Choose how to reach Oakland CRI
             </h3>
 
             <p className="mt-4 leading-7 text-[var(--floating-muted)]">
-              Click the button below to start a WhatsApp conversation about land,
-              construction, property investment, site inspection, or any other
-              real estate enquiry.
+              Send your project details through either channel.
             </p>
 
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--button-bg)] px-7 py-4 text-sm font-black text-[var(--button-text)] shadow-xl shadow-[var(--button-shadow)] transition hover:bg-[var(--button-bg-hover)]"
-            >
-              Start WhatsApp Chat <ArrowRight size={18} />
-            </a>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:mt-8 lg:gap-4">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group rounded-lg border border-[var(--accent-soft-strong)] bg-[var(--surface)] p-4 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--card-shadow)] lg:p-5"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[var(--accent)] text-[var(--accent-contrast)]">
+                  <MessageCircle size={24} />
+                </div>
+                <p className="mt-5 text-xl font-black text-[var(--floating-text)]">
+                  WhatsApp
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[var(--floating-muted)]">
+                  Quick enquiries and site inspections.
+                </p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[var(--accent-text)]">
+                  Start chat <ArrowRight size={16} />
+                </span>
+              </a>
+
+              <a
+                href={emailLink}
+                className="group rounded-lg border border-[var(--accent-soft-strong)] bg-[var(--surface)] p-4 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--card-shadow)] lg:p-5"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[var(--accent)] text-[var(--accent-contrast)]">
+                  <Mail size={24} />
+                </div>
+                <p className="mt-5 text-xl font-black text-[var(--floating-text)]">
+                  Email
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[var(--floating-muted)]">
+                  Formal briefs, documents, and quotations.
+                </p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[var(--accent-text)]">
+                  Send email <ArrowRight size={16} />
+                </span>
+              </a>
+            </div>
           </div>
 
-          <div className="mt-6 rounded-3xl border border-[var(--accent-soft-strong)] p-6">
+          <div className="mt-6 hidden rounded-lg border border-[var(--accent-soft-strong)] p-6 sm:block">
             <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--accent-text)]">
               Direct Contact
             </p>
@@ -726,8 +1235,7 @@ function Contact() {
             </p>
 
             <p className="mt-3 leading-7 text-[var(--floating-muted)]">
-              We recommend sending a short message with your name, location, and
-              the service you are interested in.
+              Include your name, location, and project type.
             </p>
           </div>
         </div>
@@ -741,22 +1249,49 @@ function Footer() {
     <footer className="border-t border-[var(--border)] bg-[var(--bg)] py-8">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 text-center sm:flex-row sm:text-left lg:px-8">
         <div>
-          <p className="text-lg font-black text-[var(--text)]">OaklandCRI</p>
+          <p className="text-lg font-black text-[var(--text)]">Oakland CRI</p>
           <p className="text-sm text-[var(--muted)]">
             Real estate, construction, and property investment solutions.
           </p>
         </div>
 
         <p className="text-sm text-[var(--muted)]">
-          © 2026 OaklandCRI. All rights reserved.
+          Copyright 2026 Oakland CRI. All rights reserved.
         </p>
       </div>
     </footer>
   );
 }
 
+function MobileContactBar() {
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--border)] bg-[var(--surface)]/95 px-4 py-3 shadow-2xl shadow-black/20 backdrop-blur lg:hidden">
+      <div className="mx-auto grid max-w-md grid-cols-2 gap-3">
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[var(--button-bg)] px-4 text-sm font-black text-[var(--button-text)]"
+        >
+          <MessageCircle size={17} />
+          WhatsApp
+        </a>
+
+        <a
+          href={emailLink}
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--soft-bg)] px-4 text-sm font-black text-[var(--text)]"
+        >
+          <Mail size={17} />
+          Email
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export default function Page() {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isFaqOpen, setIsFaqOpen] = useState(false);
 
   const themeStyles: ThemeStyles = {
     "--bg": isDarkMode ? "#12110f" : "#ffffff",
@@ -792,12 +1327,6 @@ export default function Page() {
     "--image-shadow": isDarkMode
       ? "rgba(0, 0, 0, 0.38)"
       : "rgba(255, 237, 213, 0.95)",
-    "--hero-glow-one": isDarkMode
-      ? "rgba(249, 115, 22, 0.08)"
-      : "rgba(255, 237, 213, 0.78)",
-    "--hero-glow-two": isDarkMode
-      ? "rgba(255, 255, 255, 0.04)"
-      : "rgba(254, 215, 170, 0.62)",
     "--floating-panel": isDarkMode
       ? "rgba(247, 241, 232, 0.94)"
       : "rgba(255, 255, 255, 0.95)",
@@ -823,18 +1352,26 @@ export default function Page() {
   return (
     <main
       style={themeStyles}
-      className="min-h-screen scroll-smooth bg-[var(--bg)] font-sans text-[var(--text)] transition-colors duration-300"
+      className="min-h-screen scroll-smooth bg-[var(--bg)] pb-24 font-sans text-[var(--text)] transition-colors duration-300 lg:pb-0"
     >
-      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      <Navbar
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
+        onOpenFaq={() => setIsFaqOpen(true)}
+      />
       <Hero />
       <About />
+      <Pillars />
+      <CompanyObjects />
+      <WorkProcess />
       <Services />
       <WhyChooseUs />
       <Projects />
-      <Testimonials />
-      <FAQ />
+      <ReadyStart />
       <Contact />
       <Footer />
+      <MobileContactBar />
+      <FAQModal isOpen={isFaqOpen} onClose={() => setIsFaqOpen(false)} />
     </main>
   );
 }
