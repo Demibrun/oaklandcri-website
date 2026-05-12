@@ -44,6 +44,10 @@ type NavbarProps = {
   onOpenFaq: () => void;
 };
 
+type LogoIconProps = {
+  size?: number;
+};
+
 const emailAddress = "info@oaklandcri.com";
 const enquiryMessage =
   "Hello Oakland CRI,%0A%0AName:%0ALocation:%0AProject type:%0AService needed:%0A%0A";
@@ -374,6 +378,21 @@ function SectionBadge({ children }: SectionBadgeProps) {
     <span className="inline-flex max-w-full whitespace-normal break-words rounded-full border border-[var(--accent-soft-strong)] bg-[var(--accent-soft)] px-4 py-2 text-center text-xs font-black uppercase leading-5 tracking-[0.12em] text-[var(--accent-text)] sm:tracking-[0.22em]">
       {children}
     </span>
+  );
+}
+
+function WhatsAppLogo({ size = 22 }: LogoIconProps) {
+  return (
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
+      <path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.04-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35ZM12.04 2a9.93 9.93 0 0 0-8.42 15.2L2.5 21.29l4.19-1.1A9.94 9.94 0 1 0 12.04 2Zm0 18.21c-1.76 0-3.39-.52-4.76-1.42l-.34-.22-2.49.65.66-2.43-.23-.35a8.24 8.24 0 1 1 7.16 3.77Z" />
+    </svg>
   );
 }
 
@@ -1027,7 +1046,7 @@ function Contact() {
           </p>
 
           <div className="mt-8 space-y-3 lg:mt-10 lg:space-y-4">
-            {whatsappContacts.map((contact, index) => (
+            {whatsappContacts.map((contact) => (
               <a
                 key={contact.label}
                 href={contact.whatsappHref}
@@ -1035,11 +1054,11 @@ function Contact() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 rounded-lg border border-[var(--on-dark-border)] bg-[var(--on-dark-panel)] p-5 transition hover:bg-[var(--on-dark-panel-hover)]"
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-green-500 text-sm font-black text-white">
-                  {index + 1}
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#25d366] text-white">
+                  <WhatsAppLogo size={20} />
                 </span>
                 <span className="font-semibold">
-                  WhatsApp {index + 1}: {contact.label}
+                  WhatsApp: {contact.label}
                 </span>
               </a>
             ))}
@@ -1094,7 +1113,7 @@ function MobileContactBar() {
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3 lg:hidden">
       {isOpen && (
         <div className="flex flex-col items-end gap-3">
-          {whatsappContacts.map((contact, index) => (
+          {whatsappContacts.map((contact) => (
             <a
               key={contact.label}
               href={contact.whatsappHref}
@@ -1104,7 +1123,7 @@ function MobileContactBar() {
               aria-label={`Contact Oakland CRI on WhatsApp at ${contact.label}`}
               title={contact.label}
             >
-              <span className="text-base font-black">{index + 1}</span>
+              <WhatsAppLogo size={23} />
             </a>
           ))}
 
