@@ -114,6 +114,30 @@ const services = [
   },
 ];
 
+const processSteps = [
+  {
+    step: "01",
+    title: "Brief",
+    description: "Clarify the goal, location, scope, and service need.",
+  },
+  {
+    step: "02",
+    title: "Verify",
+    description: "Review the property, site, documents, or supply requirement.",
+  },
+  {
+    step: "03",
+    title: "Plan",
+    description:
+      "Set the practical path for acquisition, build, investment, or supply.",
+  },
+  {
+    step: "04",
+    title: "Execute",
+    description: "Coordinate people, materials, approvals, and delivery steps.",
+  },
+];
+
 const missionVisionItems = [
   {
     label: "Mission",
@@ -670,6 +694,58 @@ function Pillars() {
   );
 }
 
+function WorkProcess() {
+  return (
+    <section
+      data-reveal
+      className="reveal-section bg-[var(--bg)] py-12 lg:py-20"
+    >
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+          <div>
+            <SectionBadge>How We Work</SectionBadge>
+
+            <h2 className="mt-5 text-3xl font-black tracking-tight text-[var(--text)] sm:text-4xl md:text-5xl">
+              A clearer path from enquiry to execution.
+            </h2>
+          </div>
+
+          <p className="text-base leading-7 text-[var(--muted)] sm:text-lg sm:leading-8">
+            A simple sequence for property, construction, investment, and
+            supply work.
+          </p>
+        </div>
+
+        <div className="mt-8 overflow-x-auto pb-3 lg:mt-10 lg:overflow-visible lg:pb-0">
+          <div className="relative flex min-w-max items-start justify-between gap-8 px-1 pt-2 lg:min-w-0 lg:gap-5 lg:px-0">
+            <div className="absolute left-10 right-10 top-10 h-px bg-[var(--border)]" />
+
+            {processSteps.map((item) => (
+              <article
+                key={item.step}
+                className="relative z-10 flex w-32 shrink-0 flex-col items-center text-center sm:w-40 lg:w-auto lg:flex-1 lg:shrink"
+              >
+                <div className="flex h-20 w-20 flex-col items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] shadow-lg shadow-[var(--card-shadow)]">
+                  <span className="text-xs font-black text-[var(--accent-text)]">
+                    {item.step}
+                  </span>
+                  <span className="mt-1 text-sm font-black text-[var(--text)]">
+                    {item.title}
+                  </span>
+                </div>
+
+                <p className="mt-3 hidden max-w-48 text-sm leading-6 text-[var(--muted)] sm:block">
+                  {item.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Services() {
   return (
     <section
@@ -687,33 +763,29 @@ function Services() {
           </h2>
         </div>
 
-        <div className="mt-7 overflow-x-auto pb-3 lg:mt-10 lg:overflow-visible lg:pb-0">
-          <div className="relative flex min-w-max items-start justify-between gap-5 px-1 pt-2 lg:min-w-0 lg:gap-4 lg:px-0">
-            <div className="absolute left-8 right-8 top-8 h-px bg-[var(--border)]" />
-
+        <div className="mt-7 grid gap-3 md:grid-cols-2 lg:mt-10 lg:grid-cols-3 lg:gap-6">
           {services.map((service) => {
             const Icon = service.icon;
 
             return (
-              <article
+              <div
                 key={service.title}
-                className="group relative z-10 flex w-28 shrink-0 flex-col items-center text-center sm:w-36 lg:w-auto lg:flex-1 lg:shrink"
+                className="group flex items-center gap-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--card-shadow)] lg:block lg:p-7"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--accent-text)] shadow-lg shadow-[var(--card-shadow)] transition group-hover:-translate-y-1 group-hover:bg-[var(--accent)] group-hover:text-[var(--accent-contrast)]">
-                  <Icon size={21} />
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent-text)] transition group-hover:bg-[var(--accent)] group-hover:text-[var(--accent-contrast)] lg:h-14 lg:w-14">
+                  <Icon size={22} />
                 </div>
 
-                <h3 className="mt-3 text-xs font-black leading-5 text-[var(--text)] sm:text-sm lg:text-base">
+                <h3 className="text-base font-black text-[var(--text)] lg:mt-6 lg:text-xl">
                   {service.title}
                 </h3>
 
-                <p className="mt-2 hidden max-w-44 text-sm leading-6 text-[var(--muted)] lg:block">
+                <p className="mt-3 hidden leading-7 text-[var(--muted)] lg:block">
                   {service.description}
                 </p>
-              </article>
+              </div>
             );
           })}
-          </div>
         </div>
       </div>
     </section>
@@ -1094,7 +1166,7 @@ function Footer() {
             {companyLegalName}
           </p>
           <p className="hidden text-sm text-[var(--muted)] sm:block">
-            Real estate, construction, and property investment solutions.
+            Construction, Real estate, Investment, and Supply solutions.
           </p>
         </div>
 
@@ -1299,6 +1371,7 @@ export default function Page() {
       <Hero />
       <About />
       <Pillars />
+      <WorkProcess />
       <Services />
       <WhyChooseUs />
       <Projects />
