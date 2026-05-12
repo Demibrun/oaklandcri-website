@@ -416,7 +416,7 @@ function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-5 pb-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:px-8 lg:pb-24">
         <div>
-          <SectionBadge>Real Estate • Construction • Investment • Supply</SectionBadge>
+          <SectionBadge>Construction • Real Estate • Investment • Supply</SectionBadge>
 
           <h1 className="mt-6 max-w-4xl text-[clamp(2.15rem,10vw,3.25rem)] font-black leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:mt-7 lg:text-7xl">
             Oakland CRI builds property value from land to handover.
