@@ -46,15 +46,10 @@ body {
   transform-origin: left center;
 }
 
-.loader-o {
+.loader-logo {
   animation: loader-o-in 520ms cubic-bezier(0.22, 1, 0.36, 1) 620ms forwards;
   opacity: 0;
   transform: scale(0.76);
-}
-
-.loader-copy {
-  animation: loader-copy-in 420ms ease 850ms forwards;
-  opacity: 0;
 }
 
 @keyframes loader-exit {
@@ -83,20 +78,13 @@ body {
   }
 }
 
-@keyframes loader-copy-in {
-  to {
-    opacity: 1;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .loader-screen {
     animation-duration: 1ms;
   }
 
   .loader-orange,
-  .loader-o,
-  .loader-copy {
+  .loader-logo {
     animation: none;
     opacity: 1;
     transform: none;

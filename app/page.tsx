@@ -274,9 +274,14 @@ function Navbar({ isDarkMode, setIsDarkMode, onOpenFaq }: NavbarProps) {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--border)] bg-[var(--nav-bg)] backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
         <a href="#home" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--accent)] text-lg font-black text-[var(--accent-contrast)] shadow-lg shadow-[var(--button-shadow)]">
-            O
-          </div>
+          <Image
+            src="/oakland-tree-mark.svg"
+            alt="Oakland CRI logo"
+            width={64}
+            height={42}
+            priority
+            className="h-11 w-14 object-contain"
+          />
 
           <div>
             <p className="max-w-[170px] text-sm font-black leading-tight tracking-tight text-[var(--text)] sm:max-w-none sm:text-lg">
@@ -1238,21 +1243,17 @@ function MobileContactBar() {
 
 function BrandedLoader() {
   return (
-    <div className="loader-screen fixed inset-0 z-[90] grid place-items-center overflow-hidden bg-[#111827]">
-      <div className="loader-orange absolute inset-0 bg-[var(--accent)]" />
-      <div className="relative flex flex-col items-center gap-5">
-        <div className="loader-o text-6xl font-black text-white">
-          O
-        </div>
-
-        <div className="loader-copy text-center">
-          <p className="text-xl font-black tracking-tight text-white">
-            Oakland CRI Company Limited
-          </p>
-          <p className="mt-2 text-xs font-bold uppercase tracking-[0.24em] text-orange-200">
-            Building value
-          </p>
-        </div>
+    <div className="loader-screen fixed inset-0 z-[90] grid place-items-center overflow-hidden bg-[#ff7417]">
+      <div className="loader-orange absolute inset-0 bg-[#ff7417]" />
+      <div className="loader-logo relative">
+        <Image
+          src="/oakland-loader-logo.svg"
+          alt="Oakland CRI"
+          width={320}
+          height={320}
+          priority
+          className="h-56 w-56 object-contain sm:h-72 sm:w-72"
+        />
       </div>
     </div>
   );
