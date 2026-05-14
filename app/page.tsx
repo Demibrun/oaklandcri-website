@@ -275,12 +275,12 @@ function Navbar({ isDarkMode, setIsDarkMode, onOpenFaq }: NavbarProps) {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
         <a href="#home" className="flex items-center gap-3">
           <Image
-            src="/oakland-tree-mark.svg"
+            src="/download.png"
             alt="Oakland CRI logo"
-            width={64}
-            height={42}
+            width={531}
+            height={532}
             priority
-            className="h-11 w-14 object-contain"
+            className="h-12 w-12 object-contain"
           />
 
           <div>
@@ -1243,14 +1243,14 @@ function MobileContactBar() {
 
 function BrandedLoader() {
   return (
-    <div className="loader-screen fixed inset-0 z-[90] grid place-items-center overflow-hidden bg-[#ff7417]">
-      <div className="loader-orange absolute inset-0 bg-[#ff7417]" />
+    <div className="loader-screen fixed inset-0 z-[90] grid place-items-center overflow-hidden bg-[#fa741b]">
+      <div className="loader-orange absolute inset-0 bg-[#fa741b]" />
       <div className="loader-logo relative">
         <Image
-          src="/oakland-loader-logo.svg"
+          src="/OAKLAND CRI.jpeg"
           alt="Oakland CRI"
-          width={320}
-          height={320}
+          width={1278}
+          height={1280}
           priority
           className="h-56 w-56 object-contain sm:h-72 sm:w-72"
         />
